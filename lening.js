@@ -21,6 +21,32 @@ const aflossingTable = $("#aflossingstabel");
 const fmtCurrency = new Intl.NumberFormat("nl-BE", { style: "currency", currency: "EUR", maximumFractionDigits: 2 });
 const fmtNumber = (n, digits = 2) => Number.isFinite(n) ? n.toFixed(digits) : "0.00";
 
+function maakSideBar() {
+    const topNav = $("#top-nav");
+    const tabArray = ['Aflossingstabel', 'Calculator', 'Voorbeeld 1', 'Voorbeeld 2'];
+    topNav.setAttribute('role', 'tablist');
+    tabArray.forEach((tab, index) => {
+        const hyperlink = document.createElement('a');
+        hyperlink.href = '#';
+        hyperlink.textContent = tab;
+        hyperlink.setAttribute('role', 'tab'); // Add tab role
+        hyperlink.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+        if(index === 0) hyperlink.classList.add('active');
+        hyperlink.addEventListener('click', () => {
+            if (hyperlink.classList.contains("active")) return; // Prevent reloading the same tab
+            const activeLink = topNav.querySelector('.active');
+            activeLink.classList.remove("active");
+            activeLink.setAttribute('aria-selected', 'false');
+            hyperlink.classList.add("active");
+            hyperlink.setAttribute('aria-selected', 'true');
+            //activeBlad = index;
+            //localStorage.setItem('activeBlad', activeBlad);
+            //generateCalendar();
+        });
+        topNav.appendChild(hyperlink);
+    });
+};
+
 function parseInputs() {
     const bedrag = parseFloat($("#teLenenBedrag").value);
     const jkp = parseFloat($("#jkp").value);
@@ -165,5 +191,7 @@ afdrukkenBtn.addEventListener("click", printData);
 
 /* Initialize */
 document.addEventListener("DOMContentLoaded", () => {
+    maakSideBar();
     updateSummary();
 });
+

@@ -32,7 +32,11 @@ body{
     -moz-osx-font-smoothing:grayscale;
 
 }
+.main-content{
+    position: relative;
+    display: flex;
 
+}
 /* Decorative background circles (kept separate & performant) */
 .circles-wrapper{
     position:fixed;
@@ -65,6 +69,35 @@ body{
 .circle:nth-child(6){ top:370px; right:30px; width:200px; height:200px; background: rgba(250,208,196,0.52); animation-duration:28s;}
 .circle:nth-child(7){ top:450px; left:200px; width:100px; height:100px; background: rgba(250,208,196,0.52); animation-duration:31s;}
 
+.side-bar {
+    font-family: monospace;
+    width: 13%;
+    height: 100vh;
+    background-color: #24242498;
+    color: rgb(194, 194, 194);
+    box-sizing: border-box;
+    white-space: nowrap;
+    transition: width 0.2s ease-in-out;
+    overflow: hidden;
+}
+.side-bar.close {
+    width: 0;
+    overflow: hidden;
+    /*transition: width 0.3s;*/
+}
+.side-bar a {
+    font-size: 1.3em;
+    display: block;
+    padding: 15px 20px;
+    color: white;
+    text-decoration: none;
+}
+.side-bar a:hover {
+  background-color: #424242;
+}
+.side-bar a.active {
+  background-color: #fad0c4a2;
+}
 /* Layout wrapper */
 .wrapper{
     max-width:var(--max-width);
@@ -79,9 +112,10 @@ header{
     padding:1.5rem;
     border-radius:var(--radius);
     color:var(--muted);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.048), rgba(121, 121, 121, 0.13),rgba(255, 255, 255, 0.158));
+    letter-spacing: 5px;
+    /*background: linear-gradient(180deg, rgba(255, 255, 255, 0.048), rgba(121, 121, 121, 0.13),rgba(255, 255, 255, 0.158));*/
 }
-h1{ margin:0; font-family: "Times New Roman", Times, serif; }
+h1{ margin:0; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; font-size:2.5rem; }
 
 /* Form section */
 section{
@@ -127,8 +161,8 @@ input, select, button{
 }
 /* Opties in dropdown (ondersteuning kan verschillen per browser) */
 .rente-type option {
-    background-color: #d1d1d1; /* dropdown items achtergrond */
-    color: #000000;            /* dropdown items tekstkleur */
+    background-color: #e9e9e9; /* dropdown items achtergrond */
+    color: #000000; 
 }
 
 /* Hover / focus */
