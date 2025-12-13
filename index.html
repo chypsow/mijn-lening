@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="nl-be">
+    <head>
+        <script src="lening.js" defer></script>
+        <title>Lening aflossingsschema</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="images/coins.ico" type="image/x-icon">
+        <link rel="stylesheet" href="lening.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    </head>
+    <body>
+        <div class="main-content">
+            <div id="top-nav" class="side-bar no-print"></div>
+            <div class="circles-wrapper no-print">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+            </div>
+            <div class="wrapper">
+                <header class="no-print">
+                    <h1>LENING AFLOSSINGSSCHEMA</h1>
+                </header>
+                <section class="no-print">
+                    <fieldset class="links">
+                        <!--<legend>In te vullen</legend>-->
+                        <h2>In te vullen :</h2>
+                        <!--<hr style="margin: 1rem 0;">-->
+                        <div class="info-box">
+                            <label> Te lenen bedrag (EUR):&nbsp;&nbsp;&nbsp;
+                                <input type="number" id="teLenenBedrag" class="invoer">
+                            </label>
+                            <div class="label-select">
+                                <label> Jaarlijkse rentevoet (%):&nbsp;&nbsp;&nbsp;
+                                    <input type="number" id="jkp" class="invoer">
+                                </label>
+                            
+                                <select id="renteType" class="rente-type">
+                                    <option value="1">Effectief</option>
+                                    <option value="2">Nominaal</option>
+                                </select>
+                            </div>
+                            <label> Lening periode (maand):&nbsp;&nbsp;&nbsp;
+                                <input type="number" id="periode" class="invoer">
+                            </label>
+                            <label> Start datum:&nbsp;&nbsp;&nbsp;
+                                <input type="date" id="startDatum">
+                            </label>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="rechts">
+
+                        <!--<legend>In te vullen</legend>-->
+                        <h2>Overzicht lening :</h2>
+                        <!--<hr style="margin: 1rem 0;">-->
+                        <div class="info-box">
+                            <label> Periodieke betaling:
+                                <input type="text" id="pmt" disabled>
+                            </label>
+                            <label> Periodieke rentevoet:
+                                <input type="text" id="rente" disabled>
+                            </label>
+                            <label> Lening periode:
+                                <input type="text" id="periodeJaar" disabled>
+                            </label>
+                            <label> Totaal interesten:
+                                <input type="text" id="interesten" disabled>
+                            </label>
+                        </div>
+                    </fieldset>
+                    
+                    
+                </section>
+                <button id="aflossingBtn" disabled class="no-print">Aflossingstabel</button>
+                <button id="afdrukken" class="afdrukken no-print">Afdrukken</button>
+                
+                <div id="managerTable" class="print-container">
+                    <ul id="leningOverzicht" class="lening-overzicht on-print" hidden></ul>
+                    <table id="aflossingstabel" hidden>
+                        <thead id="tableHeader" class="table-header">
+                            <tr>
+                                <th>No</th>
+                                <th>Datum</th>
+                                <th>Begin kapitaal</th>
+                                <th>Aflossing totaal</th>
+                                <th>Aflossing kapitaal</th>
+                                <th>Aflossing rente</th>
+                                <th>Uitstaand kapitaal</th>
+                                <th>Cumulatieve interesten</th>
+                                <th>Cumulatief afbetaald KPT</th>
+                                <th>Cumulatif aflossing</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tableInhoud" class="table-inhoud"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <footer class="no-print">
+           POWERED BY CHYPSOW
+        </footer>
+    </body>
+</html>
