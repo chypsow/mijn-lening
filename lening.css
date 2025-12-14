@@ -1,182 +1,3 @@
-/* ...existing code... */
-
-/* Professioneel, geoptimaliseerd en onderhoudsvriendelijk CSS-bestand */
-
-:root{
-    /* Kleuren & typografie */
-    --bg-dark: #2a2a2a;
-    --bg-mid: #6f6f6f;
-    --accent: #fad0c4;
-    --muted: #f0f0f0;
-    --card-bg: linear-gradient(180deg, #2f2f2f 0%, #474747 100%);
-    --glass: rgba(255,255,255,0.08);
-
-    --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --font-mono: "Courier New", Courier, monospace;
-
-    --radius: 7px;
-    --gap: 1.25rem;
-    --max-width: 1800px;
-}
-
-*{box-sizing:border-box}
-
-body{
-    /*height:100%;*/
-    margin:0;
-    /*font-family:var(--font-sans);*/
-    color:#eaeaea;
-    background: radial-gradient(circle at 10% 10%, #3a3a3a 0%, #1f1f1f 60%);
-    background-attachment: fixed;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-
-}
-.main-content{
-    position: relative;
-    display: flex;
-}
-/* Decorative background circles (kept separate & performant) */
-.circles-wrapper{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:-1;
-    overflow:hidden;
-}
-.circle{
-    position:absolute;
-    border-radius:50%;
-    background:var(--glass);
-    will-change:transform;
-    opacity:.95;
-}
-/* positions preserved from original, animated only if allowed */
-@media (prefers-reduced-motion: no-preference){
-    @keyframes moveCircles {
-        0% { transform: translateY(0) translateX(0); }
-        50% { transform: translateY(400px) translateX(-160px); }
-        100% { transform: translateY(0) translateX(0); }
-    }
-    /*.circle{ animation: moveCircles linear infinite; }*/
-}
-.circle:nth-child(1){ top:320px; right:200px; width:60px; height:60px; animation-duration:25s;}
-.circle:nth-child(2){ top:400px; left:150px; width:120px; height:120px; animation-duration:29s;}
-.circle:nth-child(3){ top:275px; right:200px; width:80px; height:80px; animation-duration:35s;}
-.circle:nth-child(4){ top:170px; right:230px; width:120px; height:120px; animation-duration:28s;}
-.circle:nth-child(5){ top:120px; left:200px; width:100px; height:100px; animation-duration:33s;}
-.circle:nth-child(6){ top:370px; right:30px; width:200px; height:200px; background: rgba(250, 208, 196, 0.212); animation-duration:28s;}
-.circle:nth-child(7){ top:450px; left:200px; width:100px; height:100px; background: rgba(250, 208, 196, 0.315); animation-duration:31s;}
-
-/* Sidebar */
-.sidebar {
-    font-family: var(--font-sans);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 260px;
-    height: 100vh;
-    background-color: #242424de;
-    color: #ccc;
-    transition: transform 0.3s ease;
-}
-
-/* Verbergen */
-.sidebar.closed {
-    transform: translateX(-100%);
-}
-
-.menu-btn {
-    position: fixed;
-    /*font-size: 3rem;*/
-    margin: 1.2rem;
-    width: 50px;
-    height: 50px;
-    background: none;
-    color: rgb(209, 180, 180);
-    border: none;
-    cursor: pointer;
-    z-index: 1000;
-    transition: left 0.3s ease;
-}
-.menu-btn:hover span{
-    background: #fad0c4;
-}
-.menu-btn span {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: rgb(179, 158, 158);
-    border-radius: 2px;
-    transition: 
-        transform 0.3s ease,
-        opacity 0.2s ease,
-        background-color 0.2s ease;
-}
-
-/* Lijnen positioneren */
-.menu-btn span:nth-child(1) { top: 0; }
-.menu-btn span:nth-child(2) { top: 11px; }
-.menu-btn span:nth-child(3) { top: 22px; }
-
-.menu-btn.open span:nth-child(1) {
-    transform: translateY(11px) rotate(45deg);
-}
-
-.menu-btn.open span:nth-child(2) {
-    opacity: 0;
-}
-
-.menu-btn.open span:nth-child(3) {
-    transform: translateY(-11px) rotate(-45deg);
-}
-
-/* Knop verschuift mee */
-.sidebar.closed + .menu-btn {
-    left: 0;
-}
-
-.sidebar:not(.closed) + .menu-btn {
-    left: 260px;
-}
-
-/* Draai pijl */
-/*.sidebar:not(.closed) {
-    transform: rotate(180deg);
-}*/
-
-.sidebar a {
-    font-size: 1.1rem;
-    display: block;
-    padding: 15px 20px;
-    color: white;
-    text-decoration: none;
-}
-.sidebar a:hover {
-  background-color: #424242;
-}
-.sidebar a.active {
-  background-color: #fad0c4a2;
-}
-/* Layout wrapper */
-.wrapper{
-    max-width:var(--max-width);
-    width:clamp(320px, 60%, 1200px);
-    margin:2rem auto;
-    padding:1.25rem;
-}
-
-/* Header */
-header{
-    text-align:center;
-    padding:1.5rem;
-    border-radius:var(--radius);
-    color:var(--muted);
-    letter-spacing: 5px;
-    /*background: linear-gradient(180deg, rgba(255, 255, 255, 0.048), rgba(121, 121, 121, 0.13),rgba(255, 255, 255, 0.158));*/
-}
-h1{ margin:0; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bold; font-size:2.5rem; }
 
 /* Form section */
 section{
@@ -210,14 +31,14 @@ fieldset{
 /* Labels & input basic */
 /*label{ display:block; font-family: "Times New Roman", Times, serif; color: #ffffff; }*/
 label { color: #ffffff;}
-input, select, button{
+input , select, button{
     font-family:var(--font-mono);
     font-size:1rem;
     padding:.35rem .5rem;
     border-radius:4px;
     border:1px solid rgba(0,0,0,0.15);
     /*background:#f6f6f6;*/
-    color:#dddddd;
+    color:#ffffff; 
     /*outline:none;*/
 }
 /* Opties in dropdown (ondersteuning kan verschillen per browser) */
@@ -257,16 +78,40 @@ input[type="text"]{ width:10rem; }
 .rechts{ background: linear-gradient(180deg,#2b2b2b 0%, #444 100%); color:var(--accent); }
 
 /* Buttons */
-button{
-    background:linear-gradient(180deg,#f2f2f2,#e6e6e6);
+.button-group{
+    display:flex;
+    gap:1rem;
+    justify-content:space-between;
+    margin-top:1rem;
+}
+.button-group button{
+    background:linear-gradient(180deg,#d8bfbf,#948282);
     border:1px solid rgba(0,0,0,0.12);
     padding:.5rem 1rem;
     border-radius:6px;
     color: #000;
+    font-weight: bold;
 }
-button:hover:not([disabled]){ cursor:pointer; filter:brightness(0.98); }
+.button-group button:hover:not([disabled]){ cursor:pointer; filter:brightness(0.8); }
 
 /* Table */
+
+/*.afdrukken{ visibility:hidden; float:right; }*/
+.import-export-buttons{
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+}
+.import-export-buttons button{
+    background: #444;
+    color: #e9e9e9;
+    padding: .4rem .8rem;
+    font-size: .9rem;
+}
+.import-export-buttons button:hover{ cursor: pointer; filter: brightness(0.8); color: #ffe1e1; }
+/* Accessibility helpers */
+button[disabled]{ opacity:0.4; }
+
 .managerTable{ width:100%; overflow:auto; }
 table{
     width:100%;
@@ -282,37 +127,7 @@ table{
 .table-header{ position:sticky; top:0; background:linear-gradient(180deg,#e9e9e9 10%,#1b1b1b 360%); color:#000; }
 .table-header th, .table-inhoud td{ padding:.5rem .2rem; font-size:.8rem; text-align:center; border-bottom:1px solid #dcdcdc; overflow:hidden; text-overflow:ellipsis; white-space:normal; }
 
-/* Compact responsiveness */
-@media (max-width:1200px){
-    .wrapper{ width:80%; }
-    section{ flex-direction:column; gap:1rem; }
-    fieldset{ width:100%; }
-    .table-header th, .table-inhoud td{ font-size:.85rem; white-space:nowrap; }
-}
-@media (max-width:800px){
-    .wrapper{ width:94%; padding:.75rem; }
-    input[type="number"], .invoer{ width:5.25rem; }
-}
-
-/* Print styles */
-@media print{
-    .no-print{ display:none !important; }
-    .on-print{ display:block !important; }
-    body{ background:transparent; color:#000; }
-    .wrapper{ width:100%; margin:0; padding:0; }
-    table{ table-layout:auto !important; width:100% !important; }
-    header, footer{ display:none; }
-    .afdrukken{ display:none !important; }
-}
 
 /* Misc */
 .lening-overzicht{ list-style:none; padding:0; margin:0 0 1rem 0; color:#111; }
 .lening-overzicht li{ padding:.25rem 0; color: #222; font-family:var(--font-mono); }
-.afdrukken{ visibility:hidden; float:right; }
-footer{
-    position:fixed; right:20px; bottom:20px; font-weight:bold; color:rgba(250,208,196,0.28); z-index:0;
-    font-family:var(--font-sans);
-}
-
-/* Accessibility helpers */
-button[disabled]{ opacity:0.4; }

@@ -21,8 +21,8 @@ export const renderApp = {
     3: () => renderApp04()
 };
 
-function maakSideBar() {
-    const tabArray = ['Aflossingstabel', 'Calculator', 'Voorbeeld 1', 'Voorbeeld 2'];
+function makeSideBar() {
+    const tabArray = ['AFLOSSINGSTABEL', 'CALCULATOR 1', 'CALCULATOR 2', 'CALCULATOR 3'];
     DOM.sidebar.setAttribute('role', 'tablist');
     tabArray.forEach((tab, i) => {
         const hyperlink = document.createElement('a');
@@ -75,7 +75,7 @@ DOM.menuBtn.addEventListener('click', () => {
 
 /* Initialize */
 document.addEventListener("DOMContentLoaded", () => {
-    maakSideBar();
+    makeSideBar();
     renderApp[activePage]();
 });
 
