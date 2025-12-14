@@ -1,52 +1,83 @@
-"use strict";
-
-const $ = selector => document.querySelector(selector);
-const $all = selector => Array.from(document.querySelectorAll(selector));
-
-const pmtEl = $("#pmt");
-const renteEl = $("#rente");
-const periodeJaarEl = $("#periodeJaar");
-const interestenEl = $("#interesten");
-const inputsNumber = $all("input[type=number]");
-const outputsText = $all("input[type=text]");
-const tableHeader = $("#tableHeader");
-const tableInhoud = $("#tableInhoud");
-const aflossingBtn = $("#aflossingBtn");
-const datumEl = $("#startDatum");
-const afdrukkenBtn = $("#afdrukken");
-const leningOverzicht = $("#leningOverzicht");
-const renteType = $("#renteType");
-const aflossingTable = $("#aflossingstabel");
+import { DOM, $, $all, el } from './main.js';
 
 const fmtCurrency = new Intl.NumberFormat("nl-BE", { style: "currency", currency: "EUR", maximumFractionDigits: 2 });
 const fmtNumber = (n, digits = 2) => Number.isFinite(n) ? n.toFixed(digits) : "0.00";
 
-function maakSideBar() {
-    const topNav = $("#top-nav");
-    const tabArray = ['Aflossingstabel', 'Calculator', 'Voorbeeld 1', 'Voorbeeld 2'];
-    topNav.setAttribute('role', 'tablist');
-    tabArray.forEach((tab, index) => {
-        const hyperlink = document.createElement('a');
-        hyperlink.href = '#';
-        hyperlink.textContent = tab;
-        hyperlink.setAttribute('role', 'tab'); // Add tab role
-        hyperlink.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
-        if(index === 0) hyperlink.classList.add('active');
-        hyperlink.addEventListener('click', () => {
-            if (hyperlink.classList.contains("active")) return; // Prevent reloading the same tab
-            const activeLink = topNav.querySelector('.active');
-            activeLink.classList.remove("active");
-            activeLink.setAttribute('aria-selected', 'false');
-            hyperlink.classList.add("active");
-            hyperlink.setAttribute('aria-selected', 'true');
-            //activeBlad = index;
-            //localStorage.setItem('activeBlad', activeBlad);
-            //generateCalendar();
-        });
-        topNav.appendChild(hyperlink);
-    });
-};
+// UI Elements
+const leningDOM = {};
+export function renderApp02() {
+    DOM.app01.style.display = "none";
+    // Placeholder for future calculator implementation
+}
+export function renderApp03() {
+    DOM.app01.style.display = "none";
+    // Placeholder for future voorbeeld 1 implementation
+}
+export function renderApp04() {
+    DOM.app01.style.display = "none";
+    // Placeholder for future voorbeeld 2 implementation
+}
 
+const assignElts = () => {
+    leningDOM.pmtEl = $("#pmt");
+    leningDOM.renteEl = $("#rente");
+    leningDOM.periodeJaarEl = $("#periodeJaar");
+    leningDOM.interestenEl = $("#interesten");
+    leningDOM.renteType = $("#renteType");
+    leningDOM.datumEl = $("#startDatum");
+    leningDOM.aflossingBtn = $("#aflossingBtn");
+    leningDOM.afdrukkenBtn = $("#afdrukken");
+    leningDOM.aflossingTable = $("#aflossingstabel");
+    leningDOM.tableInhoud = $("#tableInhoud");
+    leningDOM.leningOverzicht = $("#leningOverzicht");
+    leningDOM.inputsNumber = $all(".invoer");
+    leningDOM.outputsText = [leningDOM.pmtEl, leningDOM.renteEl, leningDOM.periodeJaarEl, leningDOM.interestenEl];
+}
+
+// Main function to create the app01 and initialize the calculator
+export function renderApp01() {
+    DOM.app01.style.display = "block";
+    if (DOM.app01.innerHTML.trim() !== "") return; // Prevent re-initialization
+
+    // Build UI
+    const root = DOM.app01;
+    root.append(
+        createHeader(),
+        createMainSection(),
+        ...createButtons(),
+        createTable()
+    );
+    assignElts();
+    updateSummary();
+
+    // Event listeners/* Events */
+    leningDOM.inputsNumber.forEach(inp => inp.addEventListener("input", () => {
+        updateSummary();
+        // regenerate table only if visible
+        if (!leningDOM.aflossingTable.hidden) generateSchedule();
+    }));
+
+    leningDOM.renteType.addEventListener("change", () => {
+        updateSummary();
+        if (!leningDOM.aflossingTable.hidden) generateSchedule();
+    });
+
+    leningDOM.datumEl.addEventListener("change", () => {
+        if (!leningDOM.aflossingTable.hidden) generateSchedule();
+    });
+
+    leningDOM.aflossingBtn.addEventListener("click", () => {
+        if (leningDOM.aflossingTable.hidden) {
+            generateSchedule();
+        } else {
+            leningDOM.aflossingTable.hidden = true;
+            leningDOM.afdrukkenBtn.style.visibility = "hidden";
+        }
+    });
+    leningDOM.afdrukkenBtn.addEventListener("click", printData);
+}
+
+// Lening calculator logic
 function parseInputs() {
     const bedrag = parseFloat($("#teLenenBedrag").value);
     const jkp = parseFloat($("#jkp").value);
@@ -56,10 +87,10 @@ function parseInputs() {
 }
 
 function resetOutputs() {
-    outputsText.forEach(o => o.value = "");
-    afdrukkenBtn.style.visibility = "hidden";
-    aflossingTable.hidden = true;
-    aflossingBtn.disabled = true;
+    leningDOM.outputsText.forEach(o => o.value = "");
+    leningDOM.afdrukkenBtn.style.visibility = "hidden";
+    leningDOM.aflossingTable.hidden = true;
+    leningDOM.aflossingBtn.disabled = true;
 }
 
 function monthlyRate(jkp, type) {
@@ -85,11 +116,11 @@ function updateSummary() {
     const { bedrag, jkp, periode, renteType: type } = inputs;
     const i = monthlyRate(jkp, type);
     const betaling = computePayment(bedrag, i, periode);
-    pmtEl.value = fmtCurrency.format(+betaling.toFixed(2));
-    renteEl.value = (i * 100).toFixed(4) + " %";
-    periodeJaarEl.value = (periode / 12).toFixed(2) + " jaar";
-    interestenEl.value = fmtCurrency.format((betaling * periode - bedrag));
-    aflossingBtn.disabled = false;
+    leningDOM.pmtEl.value = fmtCurrency.format(+betaling.toFixed(2));
+    leningDOM.renteEl.value = (i * 100).toFixed(4) + " %";
+    leningDOM.periodeJaarEl.value = (periode / 12).toFixed(2) + " jaar";
+    leningDOM.interestenEl.value = fmtCurrency.format((betaling * periode - bedrag));
+    leningDOM.aflossingBtn.disabled = false;
 }
 
 function generateSchedule() {
@@ -98,12 +129,12 @@ function generateSchedule() {
     const { bedrag, jkp, periode, renteType: type } = inputs;
     const i = monthlyRate(jkp, type);
     const betaling = computePayment(bedrag, i, periode);
-    tableInhoud.innerHTML = "";
-    aflossingTable.hidden = false;
-    afdrukkenBtn.style.visibility = "visible";
+    leningDOM.tableInhoud.innerHTML = "";
+    leningDOM.aflossingTable.hidden = false;
+    leningDOM.afdrukkenBtn.style.visibility = "visible";
 
     // Start date
-    let currentDate = datumEl.valueAsDate ? new Date(datumEl.valueAsDate) : new Date();
+    let currentDate = leningDOM.datumEl.valueAsDate ? new Date(leningDOM.datumEl.valueAsDate) : new Date();
     // Ensure we show the starting month as provided (don't move before first row)
     const fmtDate = d => new Date(d).toLocaleDateString("nl-BE");
 
@@ -144,25 +175,25 @@ function generateSchedule() {
             tr.appendChild(td);
         }
 
-        tableInhoud.appendChild(tr);
+        leningDOM.tableInhoud.appendChild(tr);
         balance = newBalance;
         if (balance <= 0) break;
     }
 }
 
 function preparePrintOverview() {
-    leningOverzicht.innerHTML = "";
+    leningDOM.leningOverzicht.innerHTML = "";
     const inputs = parseInputs();
     const li = (text) => {
         const el = document.createElement("li");
         el.textContent = text;
-        leningOverzicht.appendChild(el);
+        leningDOM.leningOverzicht.appendChild(el);
     };
     li("Te lenen bedrag: " + fmtCurrency.format(inputs.bedrag));
-    li("Maandelijkse aflossing: " + (pmtEl.value || "-"));
+    li("Maandelijkse aflossing: " + (leningDOM.pmtEl.value || "-"));
     li("JKP: " + (inputs.jkp || "-") + " %");
     li("Periode: " + (inputs.periode || "-") + " maanden");
-    li("Totaal interesten: " + (interestenEl.value || "-"));
+    li("Totaal interesten: " + (leningDOM.interestenEl.value || "-"));
 }
 
 function printData() {
@@ -170,28 +201,130 @@ function printData() {
     window.print();
 }
 
-/* Events */
-inputsNumber.forEach(inp => inp.addEventListener("input", () => {
-    updateSummary();
-    // regenerate table only if visible
-    if (!aflossingTable.hidden) generateSchedule();
-}));
+// Create Elements
+function createHeader() {
+    return el("header", { class: "no-print" }, [
+        el("h1", { text: "LENING AFLOSSINGSSCHEMA" })
+    ]);
+}
+function createMainSection() {
+    return el("section", { class: "no-print" }, [
+        createLinksFieldset(),
+        createRechtsFieldset()
+    ]);
+}
+function createLinksFieldset() {
+    return el("fieldset", { class: "links" }, [
+        el("h2", { text: "In te vullen :" }),
+        el("div", { class: "info-box" }, [
+            createBedragInput(),
+            createRenteInput(),
+            createPeriodeInput(),
+            createStartDatumInput()
+        ])
+    ]);
+}
+function createBedragInput() {
+    return el("label", {
+        html: `Te lenen bedrag (EUR):&nbsp;&nbsp;&nbsp;
+        <input type="number" id="teLenenBedrag" class="invoer">`
+    });
+}
 
-renteType.addEventListener("change", () => {
-    updateSummary();
-    if (!aflossingTable.hidden) generateSchedule();
-});
+function createRenteInput() {
+    return el("div", { class: "label-select", html: `
+        <label>
+            Jaarlijkse rentevoet (%):&nbsp;&nbsp;&nbsp;
+            <input type="number" id="jkp" class="invoer">
+        </label>
+        <select id="renteType" class="rente-type">
+            <option value="1">Effectief</option>
+            <option value="2">Nominaal</option>
+        </select>
+    `});
+}
 
-datumEl.addEventListener("change", () => {
-    if (!aflossingTable.hidden) generateSchedule();
-});
+function createPeriodeInput() {
+    return el("label", {
+        html: `Lening periode (maand):&nbsp;&nbsp;&nbsp;
+        <input type="number" id="periode" class="invoer">`
+    });
+}
 
-aflossingBtn.addEventListener("click", generateSchedule);
-afdrukkenBtn.addEventListener("click", printData);
+function createStartDatumInput() {
+    return el("label", {
+        html: `Start datum:&nbsp;&nbsp;&nbsp;
+        <input type="date" id="startDatum">`
+    });
+}
+function createRechtsFieldset() {
+    return el("fieldset", { class: "rechts" }, [
+        el("h2", { text: "Overzicht lening :" }),
+        el("div", { class: "info-box", html: `
+            <label> Periodieke betaling:
+                <input type="text" id="pmt" disabled>
+            </label>
+            <label> Periodieke rentevoet:
+                <input type="text" id="rente" disabled>
+            </label>
+            <label> Lening periode:
+                <input type="text" id="periodeJaar" disabled>
+            </label>
+            <label> Totaal interesten:
+                <input type="text" id="interesten" disabled>
+            </label>
+        `})
+    ]);
+}
+function createButtons() {
+    return [
+        el("button", {
+            id: "aflossingBtn",
+            class: "no-print",
+            disabled: true,
+            text: "Aflossingstabel"
+        }),
+        el("button", {
+            id: "afdrukken",
+            class: "afdrukken no-print",
+            text: "Afdrukken"
+        })
+    ];
+}
+function createTable() {
+    return el("div", { id: "managerTable", class: "print-container" }, [
+        el("ul", {
+            id: "leningOverzicht",
+            class: "lening-overzicht on-print",
+            hidden: true
+        }),
+        el("table", { id: "aflossingstabel", hidden: true }, [
+            el("thead", { id: "tableHeader", class: "table-header", html: `
+                <tr>
+                    <th>No</th>
+                    <th>Datum</th>
+                    <th>Begin kapitaal</th>
+                    <th>Aflossing totaal</th>
+                    <th>Aflossing kapitaal</th>
+                    <th>Aflossing rente</th>
+                    <th>Uitstaand kapitaal</th>
+                    <th>Cumulatieve interesten</th>
+                    <th>Cumulatief afbetaald KPT</th>
+                    <th>Cumulatif aflossing</th>
+                </tr>
+            `}),
+            el("tbody", {
+                id: "tableInhoud",
+                class: "table-inhoud"
+            })
+        ])
+    ]);
+}
 
-/* Initialize */
-document.addEventListener("DOMContentLoaded", () => {
-    maakSideBar();
-    updateSummary();
-});
+
+
+
+
+
+
 
