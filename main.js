@@ -10,6 +10,7 @@ export const  el = (tag, options = {}, children = []) => {
 
     Object.entries(options).forEach(([key, value]) => {
         if (key === "class") element.className = value;
+        else if (key === "id") element.id = value;
         else if (key === "text") element.textContent = value;
         else if (key === "html") element.innerHTML = value;
         else element.setAttribute(key, value);

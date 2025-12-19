@@ -52,7 +52,8 @@ export function renderApp01() {
             const startDate = $("#startDatum").valueAsDate;
             if (startDate) {
                 const endDate = new Date(startDate.getFullYear(), startDate.getMonth() + parseInt(inp.value || "0", 10), startDate.getDate());
-                $(".eind-datum").textContent = `Einddatum: ${fmtDate(endDate)}`;
+                $("#eindDatum").textContent = `Einddatum: ${fmtDate(endDate)}`;
+                $("#eindDatum").classList.remove("eind-datum-hidden");
             }
         }
         updateSummary();
@@ -69,10 +70,12 @@ export function renderApp01() {
         const startDate = $("#startDatum").valueAsDate;
         if (startDate) {
             const endDate = new Date(startDate.getFullYear(), startDate.getMonth() + parseInt($("#periode").value || "0", 10), startDate.getDate());
-            $(".eind-datum").textContent = `Einddatum: ${fmtDate(endDate)}`;
+            $("#eindDatum").textContent = `Einddatum: ${fmtDate(endDate)}`;
+            $("#eindDatum").classList.remove("eind-datum-hidden");
         } else {
-            $(".eind-datum").textContent = `Einddatum: -- / -- / ----`;
+            $("#eindDatum").classList.add("eind-datum-hidden");
         }
+        
         if (!$("#aflossingstabel").hidden) generateSchedule();
     });
 
@@ -164,7 +167,8 @@ function createtDatums() {
             <input type="date" id="startDatum">`
         }),
         el("span", {
-            class: "eind-datum",
+            id: "eindDatum",
+            class: "eind-datum-hidden",
             text: "Einddatum: -- / -- / ----"
         })
     ]);
@@ -287,7 +291,8 @@ function generateSchedule() {
     // startDateValue = $("#startDatum").valueAsDate;
     let currentDate = $("#startDatum").valueAsDate ? new Date($("#startDatum").valueAsDate) : new Date();
     $('#startDatum').valueAsDate = currentDate;
-    $('.eind-datum').textContent = `Einddatum: ${fmtDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + periode, currentDate.getDate()))}`;
+    $('#eindDatum').textContent = `Einddatum: ${fmtDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + periode, currentDate.getDate()))}`;
+    $("#eindDatum").classList.remove("eind-datum-hidden");
     // Ensure we show the starting month as provided (don't move before first row)
     
     let balance = bedrag;
@@ -369,7 +374,12 @@ function importData() {
             $("#periode").value = data.periode || "";
             $("#renteType").value = data.renteType || "1";
             $("#startDatum").value = data.startDatum || "";
-            
+            if (data.startDatum) {
+                const startDate = new Date(data.startDatum);
+                const endDate = new Date(startDate.getFullYear(), startDate.getMonth() + parseInt(data.periode || "0", 10), startDate.getDate());
+                $("#eindDatum").textContent = `Einddatum: ${fmtDate(endDate)}`;
+                $("#eindDatum").classList.remove("eind-datum-hidden");
+            }
             updateSummary();
             if (!$("#aflossingstabel").hidden) {
                 generateSchedule();

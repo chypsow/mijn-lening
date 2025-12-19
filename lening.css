@@ -110,6 +110,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     align-items: center;
     gap: 1.5rem;
 }
+.eind-datum-hidden {
+    display: none;
+}   
 input:disabled{ background:transparent; border:none; color:var(--accent); font-family:var(--font-mono); }
 
 /* Compact layout for rente + select */
