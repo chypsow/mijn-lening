@@ -83,7 +83,7 @@ function createHeader(tekst = "LENING AFLOSSINGSSCHEMA") {
     ]);
 }
 function createHeading() {
-    return el("div", { class: "heading no-print" }, [
+    return el("div", { class: "top-row no-print" }, [
         createBankName(),
         createImportExportButtons()
     ]);
@@ -375,7 +375,12 @@ function exportData() {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(data, null, 2));
     const downloadAnchorNode = document.createElement('a');
     downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", `${data.bank}_${data.bedrag/1000}k_${data.periode}m_${data.startDatum}.txt`);
+    //filename format: bank_bedragk_periodem_startDatum.txt
+    const safeBankName = data.bank.replace(/[^a-z0-9]/gi, '_').toLowerCase() || "bank";
+    //als datum niet ingevuld is, gebruik dan 'nodate'
+    if (!data.startDatum) data.startDatum = "nodate";
+    const filename = `${safeBankName}_${data.bedrag/1000}k_${data.periode}m_${data.startDatum}.txt`;
+    downloadAnchorNode.setAttribute("download", filename);
     document.body.appendChild(downloadAnchorNode);
     downloadAnchorNode.click();
     downloadAnchorNode.remove();
