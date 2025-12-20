@@ -1,0 +1,44 @@
+/*.label-status {
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: normal;
+    font-size: 1.5rem;
+    color: #ffffff;
+    width: fit-content;
+}*/
+.label-status input {
+    margin-left: 1.5rem;
+}
+.vandaag-btn {
+    /*font-family: monospace;*/
+    margin-left: 1rem;
+    padding: .3rem .8rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: none;
+    background-color: var(--accent);
+    color: #000000;
+    cursor: pointer;
+}
+.bereken-btn {
+    margin-left: 1rem;
+    padding: .3rem 1.8rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: none;
+    background-color: rgb(214, 214, 214);
+    color: #000000;
+    cursor: pointer;
+}
+/*.calculator1 {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1rem;
+    background: var(--card-bg);
+    border-radius: var(--radius);
+}*/
+.sectie1 {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
