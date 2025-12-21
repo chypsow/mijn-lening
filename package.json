@@ -1,0 +1,11 @@
+{
+  "name": "mijn-lening",
+  "version": "1.0.0",
+  "description": "Mijn Lening - PWA icon build tools",
+  "scripts": {
+    "build-icons": "node tools/convert-icons.js"
+  },
+  "devDependencies": {
+    "sharp": "^0.32.0"
+  }
+}
