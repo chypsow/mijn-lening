@@ -119,8 +119,8 @@ h1{ margin:0; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bol
 /* Sidebar */
 .sidebar {
     display: flex;
-    flex-direction: row;;
-    flex-wrap: wrap;
+    flex-direction: row;
+    /*flex-wrap: wrap;*/
     font-family: var(--font-sans);
     position: fixed;
     top: 0;
@@ -134,9 +134,9 @@ h1{ margin:0; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bol
 }
 
 /* Verbergen */
-.sidebar.closed {
+/*.sidebar.closed {
     transform: translateX(-100%);
-}
+}*/
 
 .sidebar a {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -154,7 +154,6 @@ h1{ margin:0; font-family: Verdana, Geneva, Tahoma, sans-serif; font-weight: bol
 .sidebar a.active {
     background-color: #fad0c4a2;
     color: #000;
-    /*font-weight: bold;*/
 }
 
 /* Layout wrapper */
