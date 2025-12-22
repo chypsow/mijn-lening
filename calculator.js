@@ -31,11 +31,23 @@ function overzichtInvullen() {
     const renteElement = $('#rente');
     const periodeElement = $('#periodeJaar');
     const interestenElement = $('#interesten');
+    const startdatumElement = $('#startDatum');
     if (bedragElement) $('#bedrag').textContent = fmtCurrency.format(bedragElement.value);
     if (pmtElement) $('#pmt2').textContent = pmtElement.value;
     if (renteElement) $('#rente2').textContent = renteElement.value;
     if (periodeElement) $('#periodeJaar2').textContent = periodeElement.value;
     if (interestenElement) $('#interesten2').textContent = interestenElement.value;
+    if (startdatumElement) {
+        const startDate = new Date(startdatumElement.value);
+        if (!isNaN(startDate.getTime())) {
+            const formattedDate = startDate.toLocaleDateString('nl-NL', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            $('#startDatumDisplay').textContent = formattedDate;
+        }
+    }
 }
 
 function calculteTotals() {
@@ -108,6 +120,9 @@ function createOverzicht() {
             </p>
             <p> Totaal te betalen interesten:
                 <span id="interesten2"></span>
+            </p>
+            <p> Startdatum lening:
+                <span id="startDatumDisplay"></span>
             </p>
         `})
     ]);
