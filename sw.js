@@ -1,4 +1,4 @@
-const CACHE_NAME = 'mijn-lening-v1';
+const CACHE_NAME = 'my-loan-v1';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

@@ -1,7 +1,7 @@
 {
-  "name": "Mijn Lening",
-  "short_name": "Lening",
-  "description": "Lening aflossingsschema - bekijk status en aflossingstabel",
+  "name": "my loan",
+  "short_name": "Loan",
+  "description": "A simple loan calculator application.",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",

@@ -1,4 +1,4 @@
-PWA Test & Install — Mijn Lening
+PWA Test & Install — My Loan
 
 Kort: zo test je de PWA lokaal en hoe gebruikers de app op hun telefoon kunnen toevoegen.
 

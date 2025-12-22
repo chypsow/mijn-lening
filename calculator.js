@@ -1,4 +1,4 @@
-import { $, el, showApp, fmtCurrency } from './main.js';
+import { $, el, showApp, fmtCurrency, $all, fmtDate } from './main.js';
 import { createHeader, parseInputs, monthlyRate, computePayment } from './lening.js';
 
 export function renderApp02() {
@@ -15,28 +15,47 @@ export function renderApp02() {
 
     overzichtInvullen();
 
-    $('#vandaag').addEventListener('click', () => {
+    const setDatumInput = () => {
+        const input = $('.datum-status');
         const today = new Date().toISOString().split('T')[0];
-        $('.datum-status').value = today;
-    });
+        if (input.value !== today) {
+            input.value = today;
+            const event = new Event('change');
+            input.dispatchEvent(event);
+        }
+    };
+    $('#vandaag').addEventListener('click', setDatumInput);
 
-    $('#berekenBtn').addEventListener('click', () => {
-        calculteTotals();
-    });
+    const handleChangeDatum = () => {
+        const gekozenDatumSpan = $all('#gekozen-datum');
+        const datumInput = $('.datum-status').value;
+        const gekozenDatum = new Date(datumInput);
+        if (!isNaN(gekozenDatum.getTime())) {
+            const formattedDate = fmtDate(gekozenDatum);
+            gekozenDatumSpan.forEach(span => {
+                span.textContent = formattedDate;
+            });
+        } else {
+            gekozenDatumSpan.forEach(span => {
+                span.textContent = '';
+            });
+        }
+        $all('.uitkomst').forEach(el => el.textContent = '');
+    };
+    $('.datum-status').addEventListener('change', handleChangeDatum);
+    $('#berekenBtn').addEventListener('click', calculteTotals);
 }
 
 function overzichtInvullen() {
     const bedragElement = $('#teLenenBedrag');
     const pmtElement = $('#pmt');
     const renteElement = $('#rente');
-    const periodeElement = $('#periodeJaar');
+    const periodeElement = $('#periode');
     const interestenElement = $('#interesten');
     const startdatumElement = $('#startDatum');
-    //const enddatumElement = $('#endDatum');
     if (bedragElement) $('#bedrag').textContent = fmtCurrency.format(bedragElement.value);
     if (pmtElement) $('#pmt2').textContent = pmtElement.value;
     if (renteElement) $('#rente2').textContent = renteElement.value;
-    if (periodeElement) $('#periodeJaar2').textContent = periodeElement.value;
     if (interestenElement) $('#interesten2').textContent = interestenElement.value;
     if (startdatumElement) {
         const startDate = new Date(startdatumElement.value);
@@ -60,6 +79,21 @@ function overzichtInvullen() {
             $('#endDatumDisplay').textContent = formattedEndDate;
         }
     }
+    if (periodeElement) {
+        $('#periodeJaar2').textContent = `${periodeElement.value} maanden`;
+        //calculate remaining duration
+        const resterendeLooptijdElement = $('#resterendeLooptijd');
+        const startDate = new Date(startdatumElement.value);
+        const today = new Date();
+        const totalePeriodeMaanden = parseInt(periodeElement.value);
+        const endDate = new Date(startDate);
+        endDate.setMonth(endDate.getMonth() + totalePeriodeMaanden);
+        let resterendeMaanden = 0;
+        if (today < endDate) {
+            resterendeMaanden = (endDate.getFullYear() - today.getFullYear()) * 12 + (endDate.getMonth() - today.getMonth());
+        }   
+        resterendeLooptijdElement.textContent = `${resterendeMaanden} maanden`;
+    }
 }
 
 function calculteTotals() {
@@ -78,6 +112,10 @@ function calculteTotals() {
     const currentDate = new Date($('.datum-status').value);
     if (isNaN(currentDate.getTime())) {
         alert('Kies een datum.');
+        return;
+    } else if (currentDate < startDate) {
+        alert('De gekozen datum ligt voor de startdatum van de lening.');
+        $all('.uitkomst').forEach(el => el.textContent = '');
         return;
     }
     
@@ -119,31 +157,39 @@ function createCalculator() {
 function createOverzicht() {
     return el("div", { class: "overzicht" }, [
         el("h2", { text: "Leningsgegevens :", class: "overzicht-titel" }),
-        el("div", { html: `
-            <p> Lening bedrag:
-                <span id="bedrag"></span>
-            </p>
-            <p> Maandelijkse betaling:
-                <span id="pmt2"></span>
-            </p>
-            <p> Maandelijkse rentevoet:
-                <span id="rente2"></span>
-            </p>
-            <p> Lening periode:
-                <span id="periodeJaar2"></span>
-            </p>
-            <p> Totaal te betalen interesten:
-                <span id="interesten2"></span>
-            </p>
-            <p> Startdatum lening:
-                <span id="startDatumDisplay"></span>
-            </p>
-            <p> Einddatum lening:
-                <span id="endDatumDisplay"></span>
-            </p>
-        `})
+        el('div', { class: 'overzicht-inhoud' }, [
+            el("div", { html: `
+                <p> Lening bedrag:
+                    <span id="bedrag"></span>
+                </p>
+                <p> Maandelijkse betaling:
+                    <span id="pmt2"></span>
+                </p>
+                <p> Maandelijkse rentevoet:
+                    <span id="rente2"></span>
+                </p>
+                <p> Totaal te betalen interesten:
+                    <span id="interesten2"></span>
+                </p>
+            `}),
+            el("div", { html: `
+                <p> Startdatum lening:
+                    <span id="startDatumDisplay"></span>
+                </p>
+                <p> Einddatum lening:
+                    <span id="endDatumDisplay"></span>
+                </p>
+                <p> Lening periode:
+                    <span id="periodeJaar2"></span>
+                </p>
+                <p> Resterende looptijd:
+                    <span id="resterendeLooptijd"></span>
+                </p>
+            `})
+        ])
     ]);
 }
+
 function createSectie1() {
     return el('div', { class: 'top-sectie' }, [
         el('div', { class: 'datum-sectie' }, [
@@ -163,7 +209,7 @@ function createSectie2() {
 function createSectie3() {
     return el('div', { class: 'sectie-wrapper' }, [
         el('div', { class: 'kapitaal-groep' , html:`
-            <div class="sectie-header">Kapitaal</div>
+            <div class="sectie-header">Kapitaal status op : <span id="gekozen-datum"></span></div>
             <p> Totaal afbetaald kapitaal: 
                 <span id="totaal-kapitaal" class="uitkomst"></span>
             </p>
@@ -173,7 +219,7 @@ function createSectie3() {
             `
         }),
         el('div', { class: 'rente-groep' , html:`
-            <div class="sectie-header">Interesten</div>
+            <div class="sectie-header">Interesten status op : <span id="gekozen-datum"></span></div>
             <p> Totaal afbetaalde interesten: 
                 <span id="totaal-rente" class="uitkomst"></span>
             </p>
