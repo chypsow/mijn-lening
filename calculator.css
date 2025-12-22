@@ -109,13 +109,4 @@
     background: var(--calc-bg);
     border-radius: var(--radius);
 }
-/* Responsive design for smaller screens */
-@media (max-width: 768px) {
-    .sectie-wrapper {
-        flex-direction: column;
-        align-items: center;
-    }
-    .kapitaal-groep, .rente-groep {
-        width: 100%;
-    }
-}
+
