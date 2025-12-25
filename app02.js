@@ -1,5 +1,5 @@
 import { $, el, createHeader, fmtCurrency, $all, fmtDate } from './main.js';
-import { parseInputs, monthlyRate, computePayment } from './app01.js';
+import { parseInputs, monthlyRate, computePayment, computeRemaining, updateSummary } from './app01.js';
 
 export function buildApp02() {
     $('#app02').append(
@@ -75,47 +75,38 @@ function calculteTotals() {
         alert('Ongeldige invoer. Controleer de leninggegevens.');
         return;
     }
-    const { bedrag, jkp, periode, renteType: type } = inputs;
-
-    const startDate = new Date($('#startDatum').value);
-    if (isNaN(startDate.getTime())) {
+    const { bedrag, jkp, periode, renteType: type, startDate } = inputs;
+    //const startDate = new Date($('#startDatum').value);
+    /*if (isNaN(startDate.getTime())) {
         alert('Er is geen geldige startdatum voor de lening gevonden.');
         return;
-    }
-    const currentDate = new Date($('.datum-status').value);
-    if (isNaN(currentDate.getTime())) {
-        alert('Kies een datum.');
+    }*/
+    const datum1Input = $('#startdatum-status').value;
+    const datum2Input = $('#einddatum-status').value;
+    const datum1 = new Date(datum1Input);
+    const datum2 = new Date(datum2Input);
+    if (isNaN(datum1.getTime()) || isNaN(datum2.getTime())) {
+        alert('Gelieve geldige datums in te vullen.');
         return;
-    } else if (currentDate < startDate) {
-        alert('De gekozen datum ligt voor de startdatum van de lening.');
+    }
+    const lastDate = datum1 < datum2 ? new Date(datum2) : new Date(datum1);
+    if (lastDate > new Date(startDate.getFullYear(), startDate.getMonth() + periode, startDate.getDate())) {
+        alert('De gekozen datum ligt na de einddatum van de lening.');
         $all('.uitkomst').forEach(el => el.textContent = '');
         return;
     }
-    
-    const paymentDate = new Date(startDate);
-    const maandRentePercentage = monthlyRate(jkp, type);
-    const betaling = computePayment(bedrag, maandRentePercentage, periode);
-    let totaalKapitaal = 0;
-    let totaalRente = 0;
-    const totalInterestAll = betaling * periode - bedrag;
-    let restantRente = totalInterestAll;
-    let maandRente = 0;
+    const firstDate = datum1 < datum2 ? datum1 : datum2;
+    //updateSummary();
+    // Calculate remaining capital and interest up to datum1
+    console.log(firstDate, lastDate);
+    const remainingAtFirstDate = computeRemaining(bedrag, jkp, type, periode, startDate, firstDate);
+    const remainingAtLastDate = computeRemaining(bedrag, jkp, type, periode, startDate, lastDate);
+    console.log(remainingAtFirstDate.capital, remainingAtLastDate.capital);
 
-    for (let i = 1; i <= periode; i++) {
-        paymentDate.setMonth(paymentDate.getMonth() + 1);
-        if (paymentDate > currentDate) break;
-        maandRente = (bedrag - totaalKapitaal) * maandRentePercentage;
-        totaalRente += maandRente;
-        restantRente -= maandRente;
-        totaalKapitaal += (betaling - maandRente);
-    }
-    
-    //const restantKapitaal = bedrag - totaalKapitaal;
-
-    $('#totaal-kapitaal').textContent = fmtCurrency.format(totaalKapitaal);
-    //$('#restant-kapitaal').textContent = fmtCurrency.format(restantKapitaal);
-    $('#totaal-rente').textContent = fmtCurrency.format(totaalRente);
-    //$('#restant-rente').textContent = fmtCurrency.format(Math.max(restantRente, 0));
+    const capitalPaid = remainingAtFirstDate.capital - remainingAtLastDate.capital;
+    const interestPaid = remainingAtFirstDate.interest - remainingAtLastDate.interest;
+    $('#totaal-kapitaal').textContent = fmtCurrency.format(capitalPaid);
+    $('#totaal-rente').textContent = fmtCurrency.format(interestPaid);
 }
 
 function createCalculator() {
@@ -124,10 +115,9 @@ function createCalculator() {
     }
     return el('div', { class: 'calculator' }, [
         createOverzicht(),
-        createSectie1(),
+        createInputSectie(),
         createBerekenButton(),
-        createSectie3()
-        //createSectie4()
+        createOutputSectie()
     ]);
 }
 
@@ -167,7 +157,7 @@ function createOverzicht() {
     ]);
 }
 
-function createSectie1() {
+function createInputSectie() {
     return el('div', { class: 'top-sectie' }, [
         el('div', { class: 'datum-sectie' }, [
             el('div', { class: 'start-datum-sectie' }, [
@@ -180,13 +170,13 @@ function createSectie1() {
             ]),
         ]),
         el('div', { class: 'uitleg-sectie' }, [
-        el('p', { class: 'uitleg-tekst', text: 'Bereken het afbetaalde kapitaal en de betaalde rente tussen twee datums op basis van de ingevoerde leninggegevens.' }),
-        el('p', { class: 'uitleg-tekst', html: `De berekening is gebaseerd op de ingevoerde leninggegevens in de <strong>Lening Calculator 1</strong> sectie.` })
+            el('p', { class: 'uitleg-tekst', text: 'Bereken het afbetaalde kapitaal en de betaalde rente tussen twee datums op basis van de ingevoerde leninggegevens.' }),
+            el('p', { class: 'uitleg-tekst', html: `De berekening is gebaseerd op de ingevoerde leninggegevens in de <strong>Lening Calculator 1</strong> sectie.` })
         ])
     ]);
 }
 
-function createSectie3() {
+function createOutputSectie() {
     return el('div', { class: 'sectie-wrapper' }, [
         el('div', { class: 'kapitaal-groep' , html:`
             <div class="sectie-header">

@@ -93,7 +93,7 @@ section{
     font-size:1rem;
     color:#dadada;
 }
-.info-box .resultaat{
+.info-box .resultaat, .info-box .resultaat-status{
     font-family:var(--font-mono);
     margin-left:0.5rem;
     font-size:1.1rem;
@@ -209,4 +209,4 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .import-export-buttons button:hover{ cursor: pointer; filter: brightness(0.7); }
 
 
-.resutaat{ color:var(--resultaat); font-weight:bold; }
+.resutaat { color:var(--resultaat); font-weight:bold; }

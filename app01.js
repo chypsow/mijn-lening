@@ -92,7 +92,7 @@ export function buildApp01() {
             if (prevDateStr.slice(0,7) === newDateStr.slice(0,7)) return;
             $("#currentDate").setAttribute("data-prev-date", newDateStr);
         }
-        resetOutputs();
+        resetStatusOutputs();
         
 
 
@@ -216,9 +216,6 @@ function createLeftSummaryFieldset() {
             <p> Lening periode:
                 <span id="periodeJaar-1" class="resultaat"></span>
             </p>
-            <p> Resterende looptijd:
-                <span id="resterendeLooptijd-1" class="resultaat"></span>
-            </p>
         `})
     ]);
 }
@@ -226,20 +223,21 @@ function createRightSummaryFieldset() {
     return el("div", { class: "output-fields card-dark" }, [
         el("div", { class: "header-row", html: `<h2>Lening status op :</h2><input type="date" id="currentDate" class="invoer" }">` }),
         el("div", { class: "info-box", html: `
-            
-            <p> Uitstaand kapitaal:
-                <span id="uitstaandKapitaal" class="resultaat"></span>
+            <p> Resterende looptijd:
+                <span id="resterendeLooptijd-1" class="resultaat-status"></span>
             </p>
-            <br>
+            <p> Uitstaand kapitaal:
+                <span id="uitstaandKapitaal" class="resultaat-status"></span>
+            </p>
             <p> Afbetaald kapitaal:
-                <span id="afbetaaldKapitaal-1" class="resultaat"></span>
+                <span id="afbetaaldKapitaal-1" class="resultaat-status"></span>
             </p>
             <p> Afbetaalde rente:
-                <span id="afbetaaldeRente-1" class="resultaat"></span>
+                <span id="afbetaaldeRente-1" class="resultaat-status"></span>
             </p>
             <p><span id="spacer">&nbsp;------------------------------------------&nbsp;</span></p>
             <p> Totaal betaald:
-                <span id="totaalBetaald-1" class="resultaat"></span>
+                <span id="totaalBetaald-1" class="resultaat-status"></span>
             </p>
          `
         })
@@ -358,10 +356,19 @@ export function parseInputs() {
 
 function resetOutputs() {
     $all(".resultaat").forEach(o => o.textContent = "");
+    resetStatusOutputs();
+    //
     $all(".uitkomst").forEach(o => o.textContent = "");
     $("#afdrukken").style.visibility = "hidden";
     $("#aflossingstabel").hidden = true;
     $("#aflossingBtn").style.visibility = "hidden";
+}
+function resetStatusOutputs() {
+    $all(".resultaat-status").forEach(o => o.textContent = "");
+    //$all(".uitkomst").forEach(o => o.textContent = "");
+    //$("#afdrukken").style.visibility = "hidden";
+    //$("#aflossingstabel").hidden = true;
+    //$("#aflossingBtn").style.visibility = "hidden";
 }
 
 export function monthlyRate(jkp, type) {
