@@ -1,10 +1,11 @@
-import { $, el, formatLocalDate, createHeader, fmtCurrency, $all } from './main.js';
+import { $, el, formatLocalDate, createHeader, fmtCurrency, $all, fmtDate } from './main.js';
 import { parseInputs, computeRemaining, updateSummary, hasMonthYearChanged } from './tab01.js';
 import { t } from './i18n.js';
 
 export function createTab02() {
+    $('#tab02').innerHTML = '';
     $('#tab02').append(
-        createHeader(t('header.loan-status')),
+        createHeader('header.loan-status'),
         createCalculator()
     );
 
@@ -69,7 +70,7 @@ function calculteTotals() {
 
 function createCalculator() {
     const createBerekenButton = () => {
-        return el('button', { id: 'berekenBtn2', class: 'bereken-btn', text: t('button.calculate') });
+        return el('button', { id: 'berekenBtn2', class: 'bereken-btn', "data-i18n": "button.calculate", text: t('button.calculate') });
     }
     return el('div', { class: 'calculator' }, [
         createOverzicht(),
@@ -81,7 +82,7 @@ function createCalculator() {
 
 function createOverzicht() {
     return el("div", { class: "overzicht" }, [
-        el('div', { class: 'overzicht-header', html: `<h2>${t('section.loan-overview')}</h2><span> ${t('label.today')} ${new Date().toLocaleDateString('nl-BE')}</span>` }),
+        el('div', { class: 'overzicht-header', html: `<h2 data-i18n="section.loan-overview">${t('section.loan-overview')}</h2><span><span data-i18n="label.today">${t('label.today')}</span> <span id="todayDate">${fmtDate(new Date())}</span></span>` }),
         el('div', { class: 'overzicht-inhoud' }, [
             el("div", { html: `
                 <p> ${t('output.loan-amount')}
@@ -118,15 +119,15 @@ function createOverzicht() {
 function createInputSectie() {
     return el('div', { class: 'input-sectie' }, [
         el('div', { class: 'uitleg-sectie' }, [
-            el('p', { class: 'uitleg-tekst', text: t('section.explanation') }),
-            el('p', { class: 'uitleg-tekst', html: `${t('section.explanation-ref')}` })
+            el('p', { class: 'uitleg-tekst', "data-i18n": "section.explanation", text: t('section.explanation') }),
+            el('p', { class: 'uitleg-tekst', html: `<span data-i18n="section.explanation-ref">${t('section.explanation-ref')}</span>` })
         ]),
         el('div', { class: 'datum-sectie' }, [
             el('div', { class: 'start-datum-sectie' }, [
-                el('h2', { text: t('label.date1'), class: 'kies-datum' }),
+                el('h2', { "data-i18n": "label.date1", text: t('label.date1'), class: 'kies-datum' }),
                 el('input', { type: 'date', id:'startdatum-status', class: 'datum-status' })]),
             el('div', { class: 'eind-datum-sectie' }, [
-                el('h2', { text: t('label.date2'), class: 'kies-datum' }),
+                el('h2', { "data-i18n": "label.date2", text: t('label.date2'), class: 'kies-datum' }),
                 el('input', { type: 'date', id:'einddatum-status', class: 'datum-status' }),
             ]),
         ]),
@@ -137,7 +138,7 @@ function createOutputSectie() {
     return el('div', { class: 'output-sectie' }, [
         el('div', { class: 'kapitaal-groep' , html:`
             <div class="sectie-header">
-                <p> ${t('output.paid-capital')} 
+                <p> <span data-i18n="output.paid-capital">${t('output.paid-capital')}</span> 
                     <span id="totaal-kapitaal" class="output-tab02"></span>
                 </p>
             </div>
@@ -145,7 +146,7 @@ function createOutputSectie() {
         }),
         el('div', { class: 'rente-groep' , html:`
             <div class="sectie-header">
-                <p> ${t('output.paid-interest')} 
+                <p> <span data-i18n="output.paid-interest">${t('output.paid-interest')}</span> 
                     <span id="totaal-rente" class="output-tab02"></span>
                 </p>
             </div>
@@ -154,7 +155,7 @@ function createOutputSectie() {
         el('hr' , { class: 'output-sectie-separator' }),
         el('div', { class: 'totaal-groep' , html:`
             <div class="sectie-header">
-                <p> ${t('output.total-paid')}
+                <p> <span data-i18n="output.total-paid">${t('output.total-paid')}</span>
                     <span id="totaal-afbetaald" class="output-tab02"></span>
                 </p>
             </div>

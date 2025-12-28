@@ -35,10 +35,18 @@ export const  el = (tag, options = {}, children = []) => {
     return element;
 };
 
-export function createHeader(tekst) {
-    return el("header", { class: "no-print" }, [
-        el("h1", { text: tekst })
-    ]);
+export function createHeader(keyOrText) {
+    // If it starts with "header.", it's a i18n key, otherwise it's direct text
+    const isI18nKey = keyOrText && keyOrText.startsWith('header.');
+    if (isI18nKey) {
+        return el("header", { class: "no-print" }, [
+            el("h1", { "data-i18n": keyOrText, text: t(keyOrText) })
+        ]);
+    } else {
+        return el("header", { class: "no-print" }, [
+            el("h1", { text: keyOrText })
+        ]);
+    }
 };
 
 function createCircles() {
@@ -86,21 +94,6 @@ export function renderTab(tabNumber) {
     });
 }
 
-function reRenderTabs() {
-    // Clear all tabs
-    $('div#tab01').innerHTML = '';
-    $('div#tab02').innerHTML = '';
-    $('div#tab03').innerHTML = '';
-    
-    // Re-create tabs with new language
-    createTab01();
-    createTab02();
-    createTab03();
-    
-    // Re-render current tab
-    renderTab(activePage + 1);
-}
-
 /* Initialize */
 document.addEventListener("DOMContentLoaded", () => {
     initLangSwitcher();
@@ -109,15 +102,15 @@ document.addEventListener("DOMContentLoaded", () => {
     createTab01();
     createTab02();
     createTab03();
-
     renderTab(activePage + 1);
     
-    // Listen for language changes and re-render tabs
+    // Listen for language changes - applyLang() updates all data-i18n elements
     window.addEventListener('languageChanged', (e) => {
-        // Update top header tabs
-        $('#topHeader').innerHTML = '';
-        createTopHeader();
-        // Re-render all tabs with new language
-        reRenderTabs();
+        // Update top header tab labels
+        const tabs = $('#topHeader').querySelectorAll('a');
+        const tabLabels = [t('tab.calculator1'), t('tab.calculator2'), t('tab.amortization')];
+        tabs.forEach((tab, i) => {
+            tab.textContent = tabLabels[i];
+        });
     });
 });

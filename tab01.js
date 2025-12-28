@@ -2,8 +2,9 @@ import { $, $all, el,formatLocalDate, createHeader,  fmtCurrency, fmtDate, fmtDe
 import { t } from './i18n.js';
 
 export function createTab01() {
+    $('#tab01').innerHTML = '';
     $('#tab01').append(
-        createHeader(t('header.loan-overview')),
+        createHeader('header.loan-overview'),
         createTopRow(),
         createMainSection(),
     );
@@ -97,14 +98,14 @@ export function hasMonthYearChanged(element) {
 function createTopRow() {
     function createBankName() {
     return el("label", { class: "bank-name" }, [
-        el("span", { text: t('label.bank-name') }),
-        el("input", { type: "text", id: "bankName", placeholder: t('placeholder.bank-name') })
+        el("span", { "data-i18n": "label.bank-name", text: t('label.bank-name') }),
+        el("input", { type: "text", id: "bankName", "data-i18n-placeholder": "label.bank-name", placeholder: t('label.bank-name') })
     ]);
     }
     function createImportExportButtons() {
         return el("div", { class: "import-export-buttons" }, [
-            el("button", { id: "importBtn", text: t('button.import') }),
-            el("button", { id: "exportBtn", text: t('button.export') })
+            el("button", { id: "importBtn", "data-i18n": "button.import", text: t('button.import') }),
+            el("button", { id: "exportBtn", "data-i18n": "button.export", text: t('button.export') })
         ]);
     }
     return el("div", { class: "top-row no-print" }, [
@@ -127,35 +128,35 @@ function createMainSection() {
 function createInputFieldset() {
     const bedragInput = () => {
         return el("label", {
-            html: `${t('label.loan-amount')} <input type="text" id="teLenenBedrag" class="invoer">`
+            html: `<span data-i18n="label.loan-amount">${t('label.loan-amount')}</span> <input type="text" id="teLenenBedrag" class="invoer">`
         });
     };
     const renteInput = () => {
         return el("div", { class: "label-select", html: `
             <label>
-                ${t('label.interest-rate')} <input type="text" id="jkp" class="invoer">
+                <span data-i18n="label.interest-rate">${t('label.interest-rate')}</span> <input type="text" id="jkp" class="invoer">
             </label>
             <select id="renteType" class="rente-type">
-                <option value="1">${t('label.interest-type.effective')}</option>
-                <option value="2">${t('label.interest-type.nominal')}</option>
+                <option value="1" data-i18n="label.interest-type.effective">${t('label.interest-type.effective')}</option>
+                <option value="2" data-i18n="label.interest-type.nominal">${t('label.interest-type.nominal')}</option>
             </select>
         `});
     };
     const periodeInput = () => {
         return el("label", {
-            html: `${t('label.period-months')} <input type="text" id="periode" class="invoer">`
+            html: `<span data-i18n="label.period-months">${t('label.period-months')}</span> <input type="text" id="periode" class="invoer">`
         });
     };
     const datums = () => {
         return el("div", { class: "datums" }, [
             el("label", {
-                html: `${t('label.start-date')}&nbsp;<input type="date" id="startDatum" class="invoer">`
+                html: `<span data-i18n="label.start-date">${t('label.start-date')}</span>&nbsp;<input type="date" id="startDatum" class="invoer">`
             }),
-            el("p", { id: "eindDatum-container", html: `${t('label.end-date')}&nbsp;&nbsp;` , class: "eind-datum-hidden" }, [el("span", { id: "eindDatum" })])
+            el("p", { id: "eindDatum-container", html: `<span data-i18n="label.end-date">${t('label.end-date')}</span>&nbsp;&nbsp;` , class: "eind-datum-hidden" }, [el("span", { id: "eindDatum" })])
         ])
     };
     return el("div", { class: "input-fields card-light" }, [
-        el("div", { class: "header-row-inputs", html: `<h2>${t('section.input-fields')}</h2><span> ${t('label.today')} ${ fmtDate(new Date()) }</span>` }),
+        el("div", { class: "header-row-inputs", html: `<h2 data-i18n="section.input-fields">${t('section.input-fields')}</h2><span><span data-i18n="label.today">${t('label.today')}</span> <span id="todayDate">${fmtDate(new Date())}</span></span>` }),
         el("div", { class: "form-inhoud" }, [
             bedragInput(),
             renteInput(),
@@ -173,24 +174,24 @@ function createSummaryFieldset() {
 
 function createLeftSummaryFieldset() {
     return el("div", { class: "output-fields card-dark" }, [
-        el("h2", { text: t('section.loan-overview') }),
+        el("h2", { "data-i18n": "section.loan-overview", text: t('section.loan-overview') }),
         el("div", { class: "info-box", html: `
-            <p> ${t('output.loan-amount')}
+            <p> <span data-i18n="output.loan-amount">${t('output.loan-amount')}</span>
                 <span id="bedrag-1" class="output-tab01"></span>
             </p>
-            <p> ${t('output.monthly-payment')}
+            <p> <span data-i18n="output.monthly-payment">${t('output.monthly-payment')}</span>
                 <span id="pmt-1" class="output-tab01"></span>
             </p>
-            <p> ${t('output.monthly-rate')}
+            <p> <span data-i18n="output.monthly-rate">${t('output.monthly-rate')}</span>
                 <span id="rente-1" class="output-tab01"></span>
             </p>
-            <p> ${t('output.total-interest')}
+            <p> <span data-i18n="output.total-interest">${t('output.total-interest')}</span>
                 <span id="interesten-1" class="output-tab01"></span>
             </p>
-            <p> ${t('output.loan-period')}
+            <p> <span data-i18n="output.loan-period">${t('output.loan-period')}</span>
                 <span id="periodeJaar-1" class="output-tab01"></span>
             </p>
-            <p> ${t('output.remaining-duration')}
+            <p> <span data-i18n="output.remaining-duration">${t('output.remaining-duration')}</span>
                 <span id="resterendeLooptijd-1" class="output-tab01"></span>
             </p>
         `})
@@ -198,24 +199,24 @@ function createLeftSummaryFieldset() {
 }
 function createRightSummaryFieldset() {
     return el("div", { class: "output-fields card-dark" }, [
-        el("div", { class: "header-row", html: `<h2>${t('section.loan-status-on')}</h2><input type="date" id="currentDate" class="invoer" }">` }),
+        el("div", { class: "header-row", html: `<h2 data-i18n="section.loan-status-on">${t('section.loan-status-on')}</h2><input type="date" id="currentDate" class="invoer" }>` }),
         el("div", { class: "info-box", html: `
             
-            <p> ${t('output.outstanding-capital')}
+            <p> <span data-i18n="output.outstanding-capital">${t('output.outstanding-capital')}</span>
                 <span id="uitstaandKapitaal" class="output-status-tab01"></span>
             </p>
-            <p> ${t('output.remaining-interest')}
+            <p> <span data-i18n="output.remaining-interest">${t('output.remaining-interest')}</span>
                 <span id="resterendeInteresten" class="output-status-tab01"></span>
             </p>
             <br>
-            <p> ${t('output.paid-capital')}
+            <p> <span data-i18n="output.paid-capital">${t('output.paid-capital')}</span>
                 <span id="afbetaaldKapitaal-1" class="output-status-tab01"></span>
             </p>
-            <p> ${t('output.paid-interest')}
+            <p> <span data-i18n="output.paid-interest">${t('output.paid-interest')}</span>
                 <span id="afbetaaldeRente-1" class="output-status-tab01"></span>
             </p>
             <hr class="output-sectie-separator">
-            <p> ${t('output.total-paid')}
+            <p> <span data-i18n="output.total-paid">${t('output.total-paid')}</span>
                 <span id="totaalBetaald-1" class="output-status-tab01"></span>
             </p>
          `

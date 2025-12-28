@@ -11,7 +11,7 @@
 }
 .overzicht span {
     font-family:var(--font-mono);
-    margin-left: 0.5rem;
+    /*margin-left: 0.5rem;*/
     font-weight: bold;
     font-size: 1.1rem;
     color: var(--accent);
@@ -96,7 +96,7 @@
     justify-content: space-between;
     margin-top: 1rem;
 }
-.sectie-header p {
+.sectie-header p span:first-child {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0;
     font-size: 1rem;
@@ -104,7 +104,7 @@
     padding: .5rem 0;
     /*color: var(--accent);*/
 }
-.sectie-header span {
+.sectie-header p span:nth-child(2) {
     font-family: var(--font-mono);
     font-size: 1.1rem;
     font-weight: bold;

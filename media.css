@@ -44,8 +44,9 @@
     color: #ffffff;*/
     label{ font-size:.65rem; }
     .datums { flex-direction:column; align-items: flex-start; gap:.5rem; }
-    .datums p { font-size:.75rem; }
-    .datums p span { font-size:.75rem; }
+    /*.datums p { font-size:.75rem; }*/
+    .datums p span:first-child { font-size:.65rem; }
+    .datums p span:nth-child(2) { font-size:.75rem; }
     .output-fields h2{ font-size:1.1rem; }
     .output-fields p{ font-size:.75rem; }
     .info-box .output-tab01, .info-box .output-status-tab01{
