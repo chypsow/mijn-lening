@@ -40,7 +40,7 @@ export function createHeader(keyOrText) {
     const isI18nKey = keyOrText && keyOrText.startsWith('header.');
     if (isI18nKey) {
         return el("header", { class: "no-print" }, [
-            el("h1", { "data-i18n": keyOrText, text: t(keyOrText) })
+            el("h1", { "data-i18n": keyOrText , text: t(keyOrText) })
         ]);
     } else {
         return el("header", { class: "no-print" }, [

@@ -24,7 +24,7 @@ export const translations = {
     "label.today": "Today:",
 
     // Tab01 - Section titles
-    "section.input-fields": "To be filled in:",
+    "section.input-fields": "Input Fields:",
     "section.loan-overview": "Loan Overview:",
     "section.loan-status-on": "Loan status on:",
 

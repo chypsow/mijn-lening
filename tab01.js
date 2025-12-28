@@ -2,7 +2,7 @@ import { $, $all, el,formatLocalDate, createHeader,  fmtCurrency, fmtDate, fmtDe
 import { t } from './i18n.js';
 
 export function createTab01() {
-    $('#tab01').innerHTML = '';
+    //$('#tab01').innerHTML = '';
     $('#tab01').append(
         createHeader('header.loan-overview'),
         createTopRow(),

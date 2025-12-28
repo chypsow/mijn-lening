@@ -1,20 +1,8 @@
 .overzicht {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin-bottom: 2rem;
     padding: 1rem;
     background: var(--card-bg);
     border-radius: var(--radius);
-}
-.overzicht p span:first-child {
-    margin: .5rem 0;
-    font-size: 1rem;
-}
-.overzicht p span:nth-child(2) {
-    font-family:var(--font-mono);
-    /*margin-left: 0.5rem;*/
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: var(--accent);
 }
 .overzicht-header {
     display: flex;
@@ -22,17 +10,13 @@
     align-items: center;
     border-bottom: 1px solid rgba(221, 221, 221, 0.205);
 }
-.overzicht-header h2 {
-    /*padding-bottom: 1rem;*/
-    /*border-bottom: 1px solid rgba(221, 221, 221, 0.205);*/
-    color: var(--accent);
-}
-.overzicht .overzicht-header span {
+.overzicht-header span {
     font-family: var(--font-mono);
     font-size: 0.9rem;
     color: #ccc;
 }
 .overzicht-inhoud {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin-top: 1rem;
     display: flex;
     flex: 1;
@@ -43,7 +27,17 @@
 .overzicht-inhoud > * {
     flex: 1;
 }
-
+.overzicht-inhoud p span:first-child {
+    margin: .5rem 0;
+    font-size: 1rem;
+}
+.overzicht-inhoud p span:nth-child(2) {
+    font-family:var(--font-mono);
+    /*margin-left: 0.5rem;*/
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--accent);
+}
 
 /* Input sectie */
 .input-sectie {
