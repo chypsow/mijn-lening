@@ -52,8 +52,8 @@
     .info-box .output-tab01, .info-box .output-status-tab01{
         font-size: .85rem;
     }
-    .overzicht-inhoud p { font-size:.75rem; }
-    .overzicht-inhoud p span { font-size:.85rem; }
+    .overzicht-inhoud p span:first-child { font-size:.75rem; }
+    .overzicht-inhoud p span:nth-child(2) { font-size:.85rem; }
     header h1{ font-size: 1.5rem; }
     :root {
         --ht-top-header: 2.5rem;

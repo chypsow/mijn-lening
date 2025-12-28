@@ -96,6 +96,9 @@
     justify-content: space-between;
     margin-top: 1rem;
 }
+.sectie-header p{
+    margin: 0;
+}
 .sectie-header p span:first-child {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0;

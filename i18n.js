@@ -281,7 +281,7 @@ let currentLang = localStorage.getItem('lang') || 'en';
 export function t(key) {
   if (!translations[currentLang] || !translations[currentLang][key]) {
     // Fallback to NL or key itself
-    return translations['nl']?.[key] || key;
+    return translations['en']?.[key] || key;
   }
   return translations[currentLang][key];
 }
