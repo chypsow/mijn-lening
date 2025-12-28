@@ -47,11 +47,12 @@
     /*.datums p { font-size:.75rem; }*/
     .datums p span:first-child { font-size:.65rem; }
     .datums p span:nth-child(2) { font-size:.75rem; }
-    .output-fields h2{ font-size:1.1rem; }
+    .output-fields h2{ font-size:1.2rem; }
     .output-fields p{ font-size:.75rem; }
     .info-box .output-tab01, .info-box .output-status-tab01{
         font-size: .85rem;
     }
+    .overzicht-header h2{ font-size:1.2rem; }
     .overzicht-inhoud p span:first-child { font-size:.75rem; }
     .overzicht-inhoud p span:nth-child(2) { font-size:.85rem; }
     header h1{ font-size: 1.5rem; }

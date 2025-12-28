@@ -119,37 +119,20 @@ export function preparePrintOverview() {
     }
 
     $("#leningOverzicht").innerHTML = "";
-    
-    updateSummary();
-    const li = (text, amount, sep = " ") => {
-        const label = document.createElement("li");
-        const el = document.createElement("span");
-        el.textContent = t(text);
-        el.setAttribute("data-i18n", text);
-        label.appendChild(el);
-        
-        // Add separator
-        const sepEl = document.createElement("span");
-        sepEl.textContent = sep;
-        label.appendChild(sepEl);
-        
-        const span = document.createElement("span");
-        span.textContent = amount;
-        label.appendChild(span);
-        $("#leningOverzicht").appendChild(label);
-    };
-    
-    li('print.loan-amount', fmtCurrency.format(inputs.bedrag));
-    li('print.annual-rate', (inputs.jkp.toString().replace('.', ',') || "-") + " %");
-    li('print.monthly-rate', ($("#rente-1").textContent || "-"));
-    li('print.monthly-payment', ($("#pmt-1").textContent || "-"));
-    li('print.total-interest', ($("#interesten-1").textContent || "-"));
-    li('print.period', (inputs.periode || "-") + " " + t('label.months'));
-    li('print.start-date', fmtDate(inputs.startDate));
-    li('print.end-date', ($('#eindDatumDisplay').textContent || "-"));
-
     $("#leningOverzicht").hidden = false;
     $("#aflossingBtn").style.visibility = "visible";
+
+    //updateSummary();
+
+    const bedrag = el("li", { html: `<strong data-i18n="print.loan-amount">${t('print.loan-amount')}</strong> ${fmtCurrency.format(inputs.bedrag)}` });
+    const jkp = el("li", { html: `<strong data-i18n="print.annual-rate">${t('print.annual-rate')}</strong> ${inputs.jkp.toString().replace('.', ',') || "-"} %` });
+    const rentevoet = el("li", { html: `<strong data-i18n="print.monthly-rate">${t('print.monthly-rate')}</strong> ${$("#rente-1").textContent || "-"}` });
+    const pmt = el("li", { html: `<strong data-i18n="print.monthly-payment">${t('print.monthly-payment')}</strong> ${$("#pmt-1").textContent || "-"}` });
+    const rente = el("li", { html: `<strong data-i18n="print.total-interest">${t('print.total-interest')}</strong> ${$("#interesten-1").textContent || "-"}` });
+    const periode = el("li", { html: `<strong data-i18n="print.period">${t('print.period')}</strong> ${inputs.periode || "-"} <span data-i18n="label.months">${t('label.months')}</span>` });
+    const startDate = el("li", { html: `<strong data-i18n="print.start-date">${t('print.start-date')}</strong> ${fmtDate(inputs.startDate)}` });
+    const endDate = el("li", { html: `<strong data-i18n="print.end-date">${t('print.end-date')}</strong> ${$("#eindDatumDisplay").textContent || "-"}` });
+    $("#leningOverzicht").append(bedrag, jkp, rentevoet, pmt, rente, periode, startDate, endDate);
 }
 function printData() {
     window.print();
