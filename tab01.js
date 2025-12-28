@@ -150,7 +150,7 @@ function createInputFieldset() {
             el("label", {
                 html: `Startdatum:&nbsp;<input type="date" id="startDatum" class="invoer">`
             }),
-            el("p", { id:"eindDatum-container", text: "Einddatum: ", class: "eind-datum-hidden" }, [el("span", { id: "eindDatum" })])
+            el("p", { id: "eindDatum-container", html: `Einddatum:&nbsp;&nbsp;` , class: "eind-datum-hidden" }, [el("span", { id: "eindDatum" })])
         ])
     };
     return el("div", { class: "input-fields card-light" }, [

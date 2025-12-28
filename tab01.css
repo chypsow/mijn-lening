@@ -214,8 +214,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     color:#ffffff;
     font-size:1rem;
 }
-.datums span{
+.datums p span{
     font-weight: bold;
+    padding: .3rem .5rem;
+    border: 1px solid var(--accent);
+    border-radius:4px;
+    background-color: rgba(27, 27, 27, 0.251);
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     color: var(--accent);
     font-size: .9rem;
