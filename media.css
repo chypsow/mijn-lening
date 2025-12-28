@@ -42,11 +42,14 @@
     /*.top-header a.active {
     background-color: #424242;
     color: #ffffff;*/
-    label{ font-size:.75rem; }
+    label{ font-size:.65rem; }
     .datums { flex-direction:column; align-items: flex-start; gap:.5rem; }
     .datums p { font-size:.75rem; }
     .output-fields h2{ font-size:1.1rem; }
-    .output-fields p{ font-size:.9rem; }
+    .output-fields p{ font-size:.75rem; }
+    .info-box .output-tab01, .info-box .output-status-tab01{
+        font-size: .7rem;
+    }
     header h1{ font-size: 1.5rem; }
     :root {
         --ht-top-header: 2.5rem;
