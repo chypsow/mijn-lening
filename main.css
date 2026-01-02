@@ -101,11 +101,28 @@ h1{
     font-family: var(--font-sans);
     font-size: 1rem;
     font-weight: bold;
-    outline:none;
+    outline: none;
     border: none;
     z-index: 1001;
     background-image: none;
     padding: 6px 12px;
+    cursor: pointer;
+}
+
+.lang-switch:hover {
+    filter: brightness(0.8);
+}
+
+.lang-switch option {
+    background-color: #e0e0e0;
+    color: #000000;
+    padding: 0.5rem;
+    border: none;
+}
+
+.lang-switch option:hover {
+    background-color: var(--accent);
+    color: #000000;
 }
 
 .wrapper{

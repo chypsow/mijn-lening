@@ -63,6 +63,8 @@
     .wrapper{ width:100%; margin:0; padding:0; }
     .table-wrapper{ max-width:100%; width:100%; margin:0; padding:0; background:transparent; box-shadow:none; }
     .table-header th{ font-size:0.7rem ; color:#000; border-color:#000;}
-    .lening-overzicht{ column-count:1; background:transparent; box-shadow:none; padding:0; }
+    .lening-overzicht{ padding:0; list-style-type: none; }
     .lening-overzicht li, .lening-overzicht li span{ color:#000; font-family:var(--font-mono); }
+    .annual-report-table{ box-shadow:none; }
+    .annual-report-table thead { position: static; border-bottom: 1px solid #7a7a7a; background: transparent; }
 }

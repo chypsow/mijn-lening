@@ -9,13 +9,8 @@ export function createTab03() {
 
     setTableVisibility(false);
 
-    $('#generateBtn').addEventListener('click', function() {
-        if($("#annualReportOutput").hidden) {
-            generateTable();
-        } else {
-            this.textContent = t('button.generate');
-            setTableVisibility(false);
-        }
+    $('#generateBtn').addEventListener('click', () => {
+        generateTable();
     });
 
     $('#afdrukken').addEventListener('click', printData);
@@ -76,7 +71,7 @@ export function generateTable() {
         return;
     }
     setTableVisibility(true);
-    $('#generateBtn').textContent = t('button.hide');
+    
     createAnnualReportTable(inputs, interval, selectedColumns);
 }
 

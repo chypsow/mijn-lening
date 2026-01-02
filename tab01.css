@@ -266,18 +266,17 @@ table{
 .table-header th, .table-inhoud td{ padding:.5rem .2rem; font-size:.8rem; text-align:center; border-bottom:1px solid #dcdcdc; overflow:hidden; text-overflow:ellipsis; white-space:normal; }
 
 /* Misc */
-.lening-overzicht{ 
+/*.lening-overzicht{ 
     list-style:none;  
     margin:0 0 1rem 0; 
     column-count:3; 
     column-gap:2rem; 
     background: var(--glass-plus); 
     border-radius:var(--radius); 
-
     box-shadow: 0 4px 6px rgba(0,0,0,0.3); 
     padding:1rem; 
-}
-.lening-overzicht li{ 
+}*/
+/*.lening-overzicht li{ 
     padding:.25rem 0; 
     color: #e4e4e4; 
     font-family:var(--font-mono); 
@@ -285,7 +284,7 @@ table{
 .lening-overzicht li span{ 
     font-weight: bold; 
     color: var(--accent); 
-}
+}*/
 
 
 

@@ -83,8 +83,9 @@
     /*display: flex;
     flex-wrap: wrap;
     gap: 0.5rem;*/
+    width: 50%;
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 0.5rem;
 }
 .checkbox-group label {
@@ -98,8 +99,9 @@
     background: var(--card-bg);
 }
 .checkbox-group input {
+    width: auto;
     margin: 0;
-    width: 1rem;
+    accent-color: var(--accent);
 }
 
 /* Annual Report Table Styles */
@@ -127,17 +129,19 @@
 }
 
 .annual-report-table thead {
-    position:sticky; top:var(--ht-top-header); background:var(--bg-table-header) ; color:#000000;
-    border-bottom:1px solid #aaaaaa;
+    position:sticky; 
+    top:var(--ht-top-header); 
+    background:var(--bg-table-header) ; 
+    color:#000000;
 }
 .annual-report-table thead th {
     font-size:.8rem;
-    padding: .3rem;
+    padding: .5rem;
     font-weight: 600;
 }
 .annual-report-table tbody td {
     font-size:.8rem; 
-    padding:.2rem; 
+    padding:.35rem; 
     border-bottom:1px solid #dcdcdc; 
 }
 .annual-report-table thead th, .annual-report-table tbody td {
@@ -170,6 +174,6 @@
     font-weight: bold;
 }*/
 
-/*.annual-report-table tbody tr:last-child {
-    border-bottom: 2px solid #1565c0;
-}*/
+.annual-report-table tbody tr:last-child {
+    border-bottom: none;
+}
