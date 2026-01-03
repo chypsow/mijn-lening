@@ -106,7 +106,7 @@
 
 /* Annual Report Table Styles */
 .report-output {
-    margin: 2rem 0;
+    margin: 2rem 0 0 0;
 }
 
 /*.annual-report-container {
@@ -152,20 +152,19 @@
     /*font-family: var(--font-mono);*/
     font-size:.9rem; 
     padding:.35rem; 
-    border-bottom:1px solid #4d4d4d;
 }
 .annual-report-table thead th, .annual-report-table tbody td {
     text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:normal;
 }
 
 .annual-report-table tbody tr {
-    background: #171b20;
-    /*border-bottom: 1px solid #444;*/
+    background: #0e2b4e;
+    border-bottom:1px solid #4d4d4d;
     transition: background-color 0.2s ease;
 }
 
 .annual-report-table tbody tr:hover {
-    background-color: #262d35;
+    background-color: #001731;
 }
 
 /*.annual-report-table tbody td {

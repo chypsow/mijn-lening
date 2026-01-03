@@ -52,6 +52,7 @@
     .sectie-header p span:nth-child(2) { font-size: .9rem; }
     .invoer{ width:5rem; font-size:.9rem; }
     .rente-type, .periode-eenheid{ font-size:.7rem; }
+    .select-columns-header { flex-direction: column; align-items: flex-start;}
 }   
 
 /* Print styles */
@@ -66,11 +67,11 @@
     .table-wrapper{ max-width:100%; width:100%; margin:0; padding:0; background:transparent; box-shadow:none; }
     .table-header th{ font-size:0.7rem ; color:#000; border-color:#000;}
     .lening-overzicht{ padding:0; list-style-type: none; }
-    .lening-overzicht li, .lening-overzicht li span{ color:#000; font-family:var(--font-mono); }
+    .lening-overzicht li, .lening-overzicht li span{ color:#000; font-family:var(--font-mono); font-size: .8rem;}
     .lening-overzicht li{ color: #929292; }
     .lening-overzicht li span{ font-weight: bold; }
     .annual-report-table{ box-shadow:none; }
     .annual-report-table thead { position: static; border-bottom: 1px solid #7a7a7a; background: transparent; }
-    .annual-report-table tbody tr { border-bottom: 1px solid #7a7a7a; background: transparent; }
+    .annual-report-table tbody tr { border-bottom: 1px solid #b3b3b3; background: transparent; }
     .annual-report-table tbody td { color: #000; }
 }
