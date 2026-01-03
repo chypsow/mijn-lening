@@ -99,13 +99,13 @@ h1{
     background-color: var(--accent);
     color: #000000;
     font-family: var(--font-sans);
-    font-size: 1rem;
+    font-size: 1.1rem;
     font-weight: bold;
     outline: none;
     border: none;
     z-index: 1001;
     background-image: none;
-    padding: 6px 12px;
+    padding: 4px 12px 6px 12px;
     cursor: pointer;
 }
 

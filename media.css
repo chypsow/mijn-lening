@@ -32,7 +32,7 @@
     header h1{ font-size: 1.5rem; }
     label{ font-size:.65rem; }
     .interval-input-container label{ font-size: .9rem;}
-    .lang-switch {padding:4px 12px; font-size:.85rem; }
+    .lang-switch {padding:2px 12px 4px 12px; font-size:.9rem; }
     .table-header th, .table-inhoud td{ font-size:.65rem; }
     .wrapper{ width:98%; padding:.5rem; }
     .top-header {flex-direction: column; gap:0; }
@@ -67,6 +67,10 @@
     .table-header th{ font-size:0.7rem ; color:#000; border-color:#000;}
     .lening-overzicht{ padding:0; list-style-type: none; }
     .lening-overzicht li, .lening-overzicht li span{ color:#000; font-family:var(--font-mono); }
+    .lening-overzicht li{ color: #929292; }
+    .lening-overzicht li span{ font-weight: bold; }
     .annual-report-table{ box-shadow:none; }
     .annual-report-table thead { position: static; border-bottom: 1px solid #7a7a7a; background: transparent; }
+    .annual-report-table tbody tr { border-bottom: 1px solid #7a7a7a; background: transparent; }
+    .annual-report-table tbody td { color: #000; }
 }

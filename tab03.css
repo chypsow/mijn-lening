@@ -144,26 +144,29 @@
 }
 .annual-report-table thead th {
     font-size:.8rem;
-    padding: .5rem;
+    padding: .55rem;
     font-weight: 600;
 }
 .annual-report-table tbody td {
+    color: var(--accent);
+    /*font-family: var(--font-mono);*/
     font-size:.9rem; 
     padding:.35rem; 
-    border-bottom:1px solid #dcdcdc; 
+    border-bottom:1px solid #4d4d4d;
 }
 .annual-report-table thead th, .annual-report-table tbody td {
     text-align:center; overflow:hidden; text-overflow:ellipsis; white-space:normal;
 }
 
 .annual-report-table tbody tr {
+    background: #171b20;
     /*border-bottom: 1px solid #444;*/
     transition: background-color 0.2s ease;
 }
 
-/*.annual-report-table tbody tr:hover {
-    background-color: #e2e2e2;
-}*/
+.annual-report-table tbody tr:hover {
+    background-color: #262d35;
+}
 
 /*.annual-report-table tbody td {
     padding: 0.75rem 1rem;
@@ -171,7 +174,7 @@
 
 .annual-report-table td:first-child {
     /*text-align: right;*/
-    color: #5f6a74;
+    color: #8d8d8d;
     font-weight: 500;
 }
 
