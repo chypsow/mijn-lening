@@ -25,7 +25,7 @@
     --text-color: #eaeaea;
     --top-header-color: #000000;
     --output-fields-color: var(--accent);
-    --import-export-bg: linear-gradient(180deg,#020824,#10354b);
+    --import-export-bg: var(--accent);
     /* H1 styling variables */
     --h1-color: rgb(28, 148, 169);
     --h1-shadow-1: rgba(0, 217, 255, 0.8);
@@ -36,12 +36,13 @@
 
 /* Thema 1: Donker met roze accent */
 :root.theme-dark-rose {
-    --bg-body: linear-gradient(90deg, #0f3460 0%, #16213e 50%, #0f0f0f 100%);
+    --bg-body: linear-gradient(90deg, #600f0f 0%, #3e1616 50%, #0f0f0f 100%);
     --accent: #fad0c4;
-    --card-bg: linear-gradient(90deg, #0f3460 0%, #16213e 50%, #0f0f0f 100%);
+    --card-bg: linear-gradient(90deg, #600f0f 0%, #3e1616 50%, #0f0f0f 100%);
     --bg-dark: linear-gradient(180deg, #1a1a2e 0%, #16213e 100%);
     --output-fields-color: var(--accent);
     --top-header-color: #000000;
+    --table-bg-row: #4e2b2b;
     /* H1 styling for roze theme */
     --h1-color: rgb(185, 143, 143);
     --h1-shadow-1: rgba(250, 208, 196, 0.8);
@@ -52,13 +53,13 @@
 
 /* Thema 2: Licht thema */
 :root.theme-light {
-    --bg-body: linear-gradient(90deg, #d8d8d8fd 0%, #999999fb 50%, #cfcfcf 100%);
+    --bg-body: linear-gradient(90deg, #170f60 0%, #25163e 50%, #0f0f0f 100%);
     --bg-dark: linear-gradient(180deg, #f5f5f5 0%, #ffffff 100%);
     --bg-mid: #ffffff;
     --accent: #653ead;
     --muted: #333333;
-    --card-bg: linear-gradient(90deg, #4321c02f 0%, #4321c033 50%, #4321c05b 100%);
-    --glass: var(--card-bg);
+    --card-bg: linear-gradient(90deg, #1e0f60 0%, #25163e 50%, #0f0f0f 100%);
+    --glass: rgba(255, 255, 255, 0.212);
     /*--glass-plus: rgba(0, 0, 0, 0.075);*/
     --border: rgba(0, 0, 0, 0.2);
     --input-bg: #433d5a71;
@@ -67,7 +68,7 @@
     --table-bg-row: #d6d4dd;
     --table-color-row: #0f0f0f;
     --table-tr-hover: #b3aebd;
-    --text-color: #0f0f0f;
+    --text-color: #e2e2e2;
     --top-header-color: #ffffff;
     --output-fields-color: rgb(214, 200, 240);
     --import-export-bg: var(--accent);

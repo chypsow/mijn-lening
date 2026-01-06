@@ -34,7 +34,7 @@
     label{ font-size:.65rem; }
     .interval-input-container label{ font-size: .9rem;}
     .lang-select {padding:2px 12px 4px 12px; font-size:.9rem; }
-    .theme-selector { top: calc(var(--ht-top-header)*2 + 10px); }
+    .theme-selector { top: calc(var(--ht-top-header)*3 + 10px); }
     .table-header th, .table-inhoud td{ font-size:.65rem; }
     .simulator, .calculator, .generator{ width:98%; padding:.5rem; }
     .top-header {flex-direction: column; gap:0; }

@@ -54,7 +54,7 @@
     border-bottom: 1px solid rgb(0, 0, 0);
     border-right: 1px solid rgb(0, 0, 0);
     border-radius:4px;
-    color: #fff;
+    color: var(--top-header-color);
     font-weight: bold;
     transition: background-color 0.3s, filter 0.3s;
 }
