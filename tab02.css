@@ -46,10 +46,10 @@
     font-size: 1rem;
 }
 .overzicht-inhoud p span:nth-child(2) {
-    font-family:var(--font-mono);
+    font-family: var(--font-mono);
     margin-left: 0.5rem;
-    font-weight: bold;
-    font-size: 1.1rem;
+    /*font-weight: bold;*/
+    font-size: 1rem;
     color: var(--accent);
 }
 
@@ -89,10 +89,6 @@
     font-size: 1.3rem;
     color: var(--accent);
 }
-/*.datum-status {
-    border: 1px solid rgba(139, 139, 139, 0.685);
-    background-color: rgba(110, 110, 110, 0.251);
-}*/
 
 /* Output sectie */
 .output-sectie {
@@ -116,8 +112,8 @@
 }
 .sectie-header p span:nth-child(2) {
     font-family: var(--font-mono);
-    font-size: 1.1rem;
-    font-weight: bold;
+    font-size: 1rem;
+    /*font-weight: bold;*/
     color: var(--accent);
     padding-left: 0.5rem;
 }

@@ -12,7 +12,7 @@ export const translations = {
     "header.amortization": "GENERATE AMORTIZATION TABLE",
 
     // Tab01 - Input labels
-    "label.loan-amount": "Loan amount (EUR):",
+    "label.loan-amount": "Loan amount",
     "label.interest-rate": "Annual interest rate (%):",
     "label.interest-type.effective": "Effective",
     "label.interest-type.nominal": "Nominal",
@@ -21,8 +21,7 @@ export const translations = {
     "label.loan-period": "Loan period:",
     "label.start-date": "Start date:",
     "label.end-date": "End date:",
-    "label.bank-name": "Bank name:",
-    "placeholder.bank-name": "bank name...",
+    "label.currency": "Currency:",
     "label.today": "Today:",
     "label.annual-report": "Annual Overview Report",
     "label.detailed-report": "Detailed Report",
@@ -118,7 +117,7 @@ export const translations = {
     "header.amortization": "GÉNÉRER UN TABLEAU D'AMORTISSEMENT",
 
     // Tab01 - Input labels
-    "label.loan-amount": "Montant du crédit (EUR):",
+    "label.loan-amount": "Montant du crédit",
     "label.interest-rate": "Taux d'intérêt annuel (%):",
     "label.interest-type.effective": "Effectif",
     "label.interest-type.nominal": "Nominal",
@@ -127,8 +126,7 @@ export const translations = {
     "label.loan-period": "Durée du crédit:",
     "label.start-date": "Date de début:",
     "label.end-date": "Date de fin:",
-    "label.bank-name": "Nom de la banque:",
-    "placeholder.bank-name": "banque...",
+    "label.currency": "Monnaie:",
     "label.today": "Aujourd'hui:",
     "label.annual-report": "Rapport de synthèse annuel",
     "label.detailed-report": "Rapport détaillé",
@@ -224,7 +222,7 @@ export const translations = {
     "header.amortization": "GENEREER AFLOSSINGSTABEL",
 
     // Tab01 - Input labels
-    "label.loan-amount": "Te lenen bedrag (EUR):",
+    "label.loan-amount": "Te lenen bedrag",
     "label.interest-rate": "Jaarlijkse rentevoet (%):",
     "label.interest-type.effective": "Effectief",
     "label.interest-type.nominal": "Nominaal",
@@ -233,8 +231,7 @@ export const translations = {
     "label.loan-period": "Lening periode:",
     "label.start-date": "Startdatum:",
     "label.end-date": "Einddatum:",
-    "label.bank-name": "Naam bank:",
-    "placeholder.bank-name": "Naam bank...",
+    "label.currency": "Valuta:",
     "label.today": "Vandaag:",
     "label.annual-report": "Jaarlijks overzicht rapport",
     "label.detailed-report": "Gedetailleerd rapport",

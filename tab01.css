@@ -26,6 +26,10 @@
     color: #ffffff;
     background-color: var(--input-bg);
 }
+
+.currency-input select{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 .top-row span{
     margin-right: 1rem;
     font-size: 1.2rem;
@@ -41,7 +45,7 @@
 }
 .import-export-buttons button{
     min-width: 7.5rem;
-    font-family:var(--font-mono);
+    font-family: var(--font-mono);
     font-size: .9rem;
     padding: .35rem .8rem;
     background: linear-gradient(180deg,#020824,#10354b);
@@ -162,10 +166,10 @@ section{
     color:#dadada;
 }
 .info-box .output-overview, .info-box .output-tab01{
-    font-family:var(--font-mono);
+    font-family: var(--font-mono);
     margin-left:0.5rem;
-    font-size:1.1rem;
-    font-weight: bold;
+    font-size:1rem;
+    /*font-weight: bold;*/
     color:var(--accent);
 }
 /* Fieldset variants */

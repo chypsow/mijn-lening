@@ -2,7 +2,7 @@
 :root{
     /* Kleuren & typografie */
     --font-sans: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    --font-mono: "Courier New", Courier, monospace;
+    --font-mono: 'source-code-pro', monospace;
     --radius: 7px;
     --gap: 1.25rem;
     --max-width: 1800px;

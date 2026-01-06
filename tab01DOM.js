@@ -9,11 +9,12 @@ export function createSimulatorDOM() {
     return container;
 }
 function createTopRow() {
-    function createBankName() {
-    return el("label", { class: "bank-name" }, [
-        el("span", { "data-i18n": "label.bank-name", text: t('label.bank-name') }),
-        el("input", { type: "text", id: "bankName", "data-i18n-placeholder": "placeholder.bank-name", placeholder: t('placeholder.bank-name') })
-    ]);
+    function createCurrecyInput() {
+        const currencyOptions = ['EUR', 'USD', 'CAD', 'GBP', 'CHF', 'JPY', 'TND', 'TRY', 'EGP', 'ZAR', 'SEK', 'DKK', 'NOK', 'PLN', 'CZK', 'HUF', 'RON', 'BGN', 'HRK', 'RSD'];
+        return el("label", { class: "currency-input" }, [
+            el("span", { "data-i18n": "label.currency", text: t('label.currency') }),
+            el("select", { id: "currencySelect" }, currencyOptions.map(currency => el("option", { value: currency, text: currency })))
+        ]);
     }
     function createImportExportButtons() {
         return el("div", { class: "import-export-buttons" }, [
@@ -22,7 +23,7 @@ function createTopRow() {
         ]);
     }
     return el("div", { class: "top-row no-print" }, [
-        createBankName(),
+        createCurrecyInput(),
         createImportExportButtons()
     ]);
 }
@@ -42,7 +43,7 @@ function createBerekenButton() {
 function createInputFieldset() {
     const bedragInput = () => {
         return el("label", {
-            html: `<span data-i18n="label.loan-amount">${t('label.loan-amount')}</span> <input type="text" id="teLenenBedrag" class="invoer">`
+            html: `<span data-i18n="label.loan-amount">${t('label.loan-amount')}</span> <span class="currency-symbol"></span> <input type="text" id="teLenenBedrag" class="invoer">`
         });
     };
     const renteInput = () => {

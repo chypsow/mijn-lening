@@ -23,6 +23,7 @@
     .invoer{ width:6rem; }
     .rente-type, .periode-eenheid{ font-size:.8rem; }
     .top-row{ flex-direction:column; align-items:flex-start; gap:1.5rem; }
+    .country-list{ right: 0;}
     .sectie-wrapper { flex-direction: column; align-items: center; }
     .kapitaal-groep, .rente-groep { width: 100%; }
     .checkbox-group { width: 100%; }

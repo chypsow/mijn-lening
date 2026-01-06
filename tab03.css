@@ -40,11 +40,8 @@
 .cb-container .interval-input::-webkit-outer-spin-button,
 .cb-container .interval-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    /*margin: 0;*/
 }
-/*.cb-container .interval-input[type=number] {
-    -moz-appearance: textfield;
-}*/
+
 .columns-container p {
     font-size: 1rem;
     color: #ffffff;
@@ -86,9 +83,6 @@
     color: #000000;
 }
 
-/*.select-btn:active {
-    background-color: #0d47a1;
-}*/
 .checkbox-group {
     /*display: flex;
     flex-wrap: wrap;
@@ -119,14 +113,8 @@
     margin: 2rem 0 0 0;
 }
 
-/*.annual-report-container {
-    display: flex;
-    justify-content: center;
-    overflow-x: auto;
-}*/
-
 .annual-report-table {
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-family: var(--font-sans);
     width: 100%;
     position: relative;
     margin: 0;
@@ -158,6 +146,7 @@
     font-weight: 600;
 }
 .annual-report-table tbody td {
+    font-family: var(--font-mono);
     color: #c9c9c9;
     font-size:.8rem; 
     padding:.35rem; 
@@ -176,14 +165,10 @@
     background-color: #001731;
 }
 
-/*.annual-report-table tbody td {
-    padding: 0.75rem 1rem;
-}*/
-
-.annual-report-table td:first-child {
+.annual-report-table td:first-child, .annual-report-table td:nth-child(2) {
+    font-weight: 500;
     /*text-align: right;*/
     color: #8d8d8d;
-    font-weight: 500;
 }
 
 /*.annual-report-table .currency-cell {

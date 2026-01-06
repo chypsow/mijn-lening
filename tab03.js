@@ -93,6 +93,7 @@ function createAnnualReportTable(inputs, interval, selectedColumns) {
     // Set custom property gebaseerd op interval
     if (interval !== 1) {
         table.style.setProperty('--second-col-width', '10rem');
+        
     }
 
     // Create table header
@@ -129,7 +130,7 @@ function createAnnualReportTable(inputs, interval, selectedColumns) {
     let balance = bedrag;
     let cumulativePrincipal = 0;
     let cumulativeInterest = 0;
-    
+
     // Determine number of intervals
     const numIntervals = Math.ceil(totalMonths / interval);
     

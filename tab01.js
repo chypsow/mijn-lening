@@ -1,4 +1,4 @@
-import { $, $all, formatLocalDate, createHeader,  fmtCurrency, fmtDate, fmtDecimal, t, el } from './main.js';
+import { $, $all, formatLocalDate, createHeader, fmtCurrency, fmtDate, fmtDecimal, t, el, getCurrency, currencyState } from './main.js';
 import { createSimulatorDOM } from './tab01DOM.js';
 import { setTableVisibility } from './tab03.js';
 
@@ -11,10 +11,9 @@ export function createTab01() {
     $('main').appendChild(tab01);
     
     // Event listeners/* Events */
-    $all(".invoer").forEach(inp => inp.addEventListener("input", () => {
-        inp.value = inp.value.replace(/\./g, ',');
-        if (inp.id === "periode") {
-            // Update end date preview
+
+    function handlePeriodAndUnitChange() {
+        // Update end date preview
             const startDate = $("#startDatum").valueAsDate;
             if (startDate) {
                 const periode = parseInt($("#periode").value || "0", 10);
@@ -28,6 +27,12 @@ export function createTab01() {
                 $("#eindDatum").setAttribute("data-prev-date", fmtDate(endDate));
                 $("#eindDatum-container").classList.remove("eind-datum-hidden");
             }
+    }
+
+    $all(".invoer").forEach(inp => inp.addEventListener("input", () => {
+        inp.value = inp.value.replace(/\./g, ',');
+        if (inp.id === "periode") {
+            handlePeriodAndUnitChange();
         }
         // Skip resetOutputs if startDatum changed but month/year didn't
         if (inp.id === "startDatum" || inp.id === "currentDate") {
@@ -42,20 +47,7 @@ export function createTab01() {
     });
 
     $("#periodeEenheid").addEventListener("change", () => {
-        // Update end date preview
-        const startDate = $("#startDatum").valueAsDate;
-        if (startDate) {
-            const periode = parseInt($("#periode").value || "0", 10);
-            const periodeEenheid = $("#periodeEenheid").value;
-            let adjustedPeriode = periode;
-            if (periodeEenheid === "years") {
-                adjustedPeriode = periode * 12;
-            }
-            const endDate = new Date(startDate.getFullYear(), startDate.getMonth() + adjustedPeriode, startDate.getDate());
-            $("#eindDatum").textContent = fmtDate(endDate);
-            $("#eindDatum").setAttribute("data-prev-date", fmtDate(endDate));
-            $("#eindDatum-container").classList.remove("eind-datum-hidden");
-        }
+        handlePeriodAndUnitChange();
         resetOutputs();
     });
 
@@ -95,7 +87,22 @@ export function createTab01() {
     $("#importBtn").addEventListener("click", importData);
     $("#exportBtn").addEventListener("click", exportData);
 
-    return tab01;
+    
+
+    // Currency select listener - update currency when changed
+    $("#currencySelect").addEventListener("change", () => {
+        const currency = $("#currencySelect").value;
+        currencyState.setCurrency(currency);
+        localStorage.setItem('currency', currency);
+        $all(".currency-symbol").forEach(elm => elm.textContent = `(${currency}):`);
+        resetOutputs();
+    });
+
+    // Initialize currency on page load
+    const savedCurrency = getCurrency();
+    currencyState.setCurrency(savedCurrency);
+    $("#currencySelect").value = savedCurrency;
+    $all(".currency-symbol").forEach(elm => elm.textContent = `(${savedCurrency}):`);
 }
 
 //make function to check if date changed month/year only
@@ -147,10 +154,6 @@ export function updateSummary() {
         alert(t('message.invalid-input'));
         return;
     }
-    //if (returnInputs && !updateOutputs) { return inputs; }
-    //console.log("Updating summary with outputs");
-
-    //$("#aflossingBtn").disabled = false;
 
     const { bedrag, jkp, periode, renteType: type, startDate } = inputs;
     const i = monthlyRate(jkp, type);
@@ -278,7 +281,11 @@ function importData() {
         reader.onload = event => {
             let data = JSON.parse(event.target.result);
             // Populate fields - support both old and new naming conventions
-            $("#bankName").value = data["bank-name"] || "";
+            const importedCurrency = data["currency-code"] || "EUR";
+            $("#currencySelect").value = importedCurrency;
+            currencyState.setCurrency(importedCurrency);
+            localStorage.setItem('currency', importedCurrency);
+            $all(".currency-symbol").forEach(elm => elm.textContent = `(${importedCurrency}):`);
             $("#teLenenBedrag").value = data["loan-amount"] || "";
             $("#jkp").value = data["annual-rate"] ? fmtDecimal(4).format(data["annual-rate"]) : "";
             $("#renteType").value = data["rate-type"] || "1";
@@ -310,7 +317,7 @@ function exportData() {
         return;
     }
     const data = {
-        "bank-name": $("#bankName").value.toUpperCase() || "Bank",
+        "currency-code": currencyState.current,
         "loan-amount": inputs.bedrag,
         "annual-rate": inputs.jkp,
         "rate-type": inputs.renteType,

@@ -9,7 +9,34 @@ let currentLang = localStorage.getItem('lang') || 'fr';
 export let activePage = localStorage.getItem('activePage') ? parseInt(localStorage.getItem('activePage')) : 0;
 export const $ = selector => document.querySelector(selector);
 export const $all = selector => Array.from(document.querySelectorAll(selector));
-export const fmtCurrency = new Intl.NumberFormat("nl-BE", { style: "currency", currency: "EUR",maximumFractionDigits: 2 });
+
+// Get currency for a country
+export function getCurrency (){
+    return localStorage.getItem('currency') || 'EUR';
+}
+
+// Create dynamic currency formatter
+export function createFmtCurrency(currency = 'EUR') {
+    return currency === 'TND' ? new Intl.NumberFormat("fr-TN", { style: "currency", currency: "TND", maximumFractionDigits: 2 }) : new Intl.NumberFormat("fr-FR", { style: "currency", currency: currency, maximumFractionDigits: 2 });
+}
+
+// Currency state object
+export const currencyState = {
+    current: 'EUR',
+    formatter: createFmtCurrency('EUR'),
+    setCurrency(currency) {
+        this.current = currency;
+        this.formatter = createFmtCurrency(currency);
+    }
+};
+
+// Export fmtCurrency as getter for backward compatibility
+export const fmtCurrency = new Proxy({}, {
+    get: (target, prop) => {
+        return currencyState.formatter[prop];
+    }
+});
+
 export const fmtDecimal = (digits = 2) => new Intl.NumberFormat("nl-BE", { style: "decimal", maximumFractionDigits: digits });
 export const fmtDate = d => new Date(d).toLocaleDateString("nl-BE");
 
@@ -166,7 +193,6 @@ export function renderTab(tabNumber) {
     tabs.forEach((tab, index) => {
         if (index === tabNumber - 1) {
             tab.style.display = 'block';
-            //if(tabNumber === 4) preparePrintOverview();
         } else {
             tab.style.display = 'none';
         }
@@ -174,9 +200,9 @@ export function renderTab(tabNumber) {
 }
 
 function autoFillInputs() {
-    $('#bankName').value = 'BTK';
     $('#teLenenBedrag').value = '220000';
     $('#jkp').value = '12.116';
+    $('#jkp').dispatchEvent(new Event('input'));
     $('#renteType').value = '2';
     $('#periode').value = '180';
     $('#periodeEenheid').value = 'months';
