@@ -18,8 +18,6 @@ export function createTab02() {
     });
 
     $('#berekenBtn-2').addEventListener('click', calculteTotals);
-
-    return tab02;
 }
 
 function calculteTotals() {
@@ -69,15 +67,16 @@ function calculteTotals() {
 }
 
 function createCalculatorDOM() {
-    const createBerekenButton = () => {
-        return el('button', { id: 'berekenBtn-2', class: 'accented-btn', "data-i18n": "button.calculate", text: t('button.calculate') });
-    }
     return el('div', { class: 'calculator' }, [
         createOverzicht(),
         createInputSectie(),
         createBerekenButton(),
         createOutputSectie()
     ]);
+}
+
+function createBerekenButton() {
+    return el('button', { id: 'berekenBtn-2', class: 'accented-btn', "data-i18n": "button.calculate", text: t('button.calculate') });
 }
 
 function createOverzicht() {
@@ -137,28 +136,22 @@ function createInputSectie() {
 function createOutputSectie() {
     return el('div', { class: 'output-sectie' }, [
         el('div', { class: 'output-groep' , html:`
-            
-                <p> <span data-i18n="output.paid-capital">${t('output.paid-capital')}</span> 
-                    <span id="totaal-kapitaal" class="output-tab02"></span>
-                </p>
-            
+            <p> <span data-i18n="output.paid-capital">${t('output.paid-capital')}</span> 
+                <span id="totaal-kapitaal" class="output-tab02"></span>
+            </p>
             `
         }),
         el('div', { class: 'output-groep' , html:`
-            
-                <p> <span data-i18n="output.paid-interest">${t('output.paid-interest')}</span> 
-                    <span id="totaal-rente" class="output-tab02"></span>
-                </p>
-           
+            <p> <span data-i18n="output.paid-interest">${t('output.paid-interest')}</span> 
+                <span id="totaal-rente" class="output-tab02"></span>
+            </p>
             `
         }),
         el('hr' , { class: 'output-sectie-separator' }),
         el('div', { class: 'output-groep' , html:`
-            
-                <p> <span data-i18n="output.total-paid">${t('output.total-paid')}</span>
-                    <span id="totaal-afbetaald" class="output-tab02"></span>
-                </p>
-           
+            <p> <span data-i18n="output.total-paid">${t('output.total-paid')}</span>
+                <span id="totaal-afbetaald" class="output-tab02"></span>
+            </p>
             `
         }),
 

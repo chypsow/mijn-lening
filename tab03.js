@@ -24,8 +24,6 @@ export function createTab03() {
     $('#deselectAllBtn').addEventListener('click', () => {
         document.querySelectorAll('.column-checkbox').forEach(checkbox => checkbox.checked = false);
     });
-
-    return tab03;
 }
 
 export function setTableVisibility(visible) {
