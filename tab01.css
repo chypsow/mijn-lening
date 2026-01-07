@@ -1,8 +1,8 @@
 .simulator{
     max-width:var(--max-width);
     width:clamp(320px, 60%, 950px);
-    margin:3rem auto;
-    padding:1.25rem;
+    margin:2rem auto 0;
+    padding:1rem 1rem 0 1rem;
     background: var(--glass);
     opacity: .98;
     border-radius:var(--radius);
@@ -54,7 +54,7 @@
     border-bottom: 1px solid rgb(0, 0, 0);
     border-right: 1px solid rgb(0, 0, 0);
     border-radius:4px;
-    color: var(--top-header-color);
+    color: var(--button-color);
     font-weight: bold;
     transition: background-color 0.3s, filter 0.3s;
 }
@@ -103,7 +103,7 @@ section{
     font-family: var(--font-mono);
     font-size: 0.9rem;
     font-weight: normal;
-    color: #e4e4e4;
+    color: var(--today-color);
 }
 .input-fields{
     /*flex:1 1 auto;*/
@@ -118,7 +118,7 @@ section{
     /*min-width:600px;*/
 }
 .form-inhoud{
-    border-top: 1px solid rgba(221, 221, 221, 0.26);
+    border-top: 1px solid var(--border);
     padding-top:1rem;
     display:flex;
     flex-direction:column;
@@ -131,6 +131,7 @@ section{
     gap:1rem;
     justify-content:space-between;
     flex-wrap:wrap;
+    margin-bottom: 1rem;
 }
 .output-fields{
     flex:1;
