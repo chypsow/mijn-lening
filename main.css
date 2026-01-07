@@ -73,7 +73,7 @@
     --output-fields-color: rgb(214, 200, 240);
     --import-export-bg: var(--accent);
     /* H1 styling for light theme */
-    --h1-color: rgb(82, 52, 150);
+    --h1-color: rgb(103, 88, 138);
     --h1-shadow-1: rgba(147, 133, 179, 0.8);
     --h1-shadow-2: rgba(147, 133, 179, 0.6);
     --h1-shadow-3: rgba(147, 133, 179, 0.4);
@@ -216,7 +216,7 @@ h1{
     top: 60px;
     right: 8px;
     display: flex;
-    flex-direction: row-reverse;
+    flex-direction: column;
     gap: 0.5rem;
     z-index: 1001;
 }
@@ -233,13 +233,13 @@ h1{
 .theme-btn.hidden {
     opacity: 0;
     visibility: hidden;
-    transform: translateX(-80px);
+    transform: translateY(80px);
 }
 
 .theme-btn.visible {
     opacity: 1;
     visibility: visible;
-    transform: translateX(0);
+    transform: translateY(0);
 }
 
 .theme-btn:hover {
