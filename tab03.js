@@ -300,9 +300,7 @@ function createCheckboxes() {
                 id: 'intervalInput',
                 type: 'number',
                 min: '1',
-                //placeholder: t('placeholder.interval'),
                 class: 'interval-input',
-                //'data-i18n-placeholder': 'placeholder.interval'
             })
         ]),
         el('div', { class: 'columns-container' }, [

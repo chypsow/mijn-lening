@@ -3,6 +3,7 @@ import { createTab01 } from './tab01.js';
 import { createTab02 } from './tab02.js';
 import { createTab03 } from './tab03.js';
 import { translations } from './i18n.js';
+//import { prePopulate } from './devTools.js';
 
 // Current language
 let currentLang = localStorage.getItem('lang') || 'fr';
@@ -92,16 +93,6 @@ function applyLang(lang) {
     } else {
       el.textContent = text;
     }
-  });
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    const key = el.getAttribute('data-i18n-placeholder');
-    el.placeholder = t(key);
-  });
-
-  // Update all elements with data-i18n-placeholder
-  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-    const key = el.getAttribute('data-i18n-placeholder');
-    el.placeholder = t(key);
   });
 }
 
@@ -217,7 +208,7 @@ function createThemeSelector() {
         { id: 'theme-light', color: 'rgba(245, 127, 49, 1)' },
     ];
     
-    const currentTheme = localStorage.getItem('theme') || 'theme-dark-cyan';
+    const currentTheme = localStorage.getItem('theme') || 'theme-light';
     
     themes.forEach(theme => {
         const btn = el('button', { 
@@ -329,7 +320,7 @@ document.addEventListener("DOMContentLoaded", () => {
     createTab03();
     $('main').appendChild(createFooter());
     renderTab(activePage + 1);
-    autoFillInputs();
+    //prePopulate();
 });
 
 export function renderTab(tabNumber) {
@@ -341,21 +332,4 @@ export function renderTab(tabNumber) {
             tab.style.display = 'none';
         }
     });
-}
-
-function autoFillInputs() {
-    $('#currencySelect').options.selectedIndex = 6; // TND
-    $('#currencySelect').dispatchEvent(new Event('change'));
-    $('#teLenenBedrag').value = '220000';
-    $('#jkp').value = '12.116';
-    $('#jkp').dispatchEvent(new Event('input'));
-    $('#renteType').value = '2';
-    $('#periode').value = '180';
-    $('#periodeEenheid').value = 'months';
-    $('#startDatum').value = '2020-11-01';
-    $('#startDatum').dispatchEvent(new Event('change'));
-    $('#currentDate').value = formatLocalDate(new Date());
-    $('#startdatum-status').value = '2020-11-01';
-    $('#einddatum-status').value = '2035-11-01';
-    $('#intervalInput').value = '1';
 }
