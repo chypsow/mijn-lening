@@ -39,7 +39,8 @@
     .theme-popup-close-btn { font-size: 2rem; }
     .theme-btn-popup { width:20px; height:20px; }
     .table-header th, .table-inhoud td{ font-size:.65rem; }
-    .simulator, .calculator, .generator{ width:98%; padding:.5rem; }
+    .calculator, .generator{ width:98%; padding:.5rem; }
+    .simulator{ width:98%; padding:.5rem .5rem 0 .5rem; }
     .top-header {flex-direction: column; gap:0; }
     .top-header a { text-align: center; padding: .75rem; }
     .datums { flex-direction:column; align-items: flex-start; gap:.5rem; }
