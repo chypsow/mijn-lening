@@ -3,13 +3,13 @@ export const translations = {
   en: {
     // Headers & sections
     "tab.simulator": "LOAN SIMULATOR",
-    "tab.calculator": "CALCULATOR",
+    "tab.calculator": "LOAN CALCULATOR",
     "tab.table": "LOAN TABLES",
-    "tab.amortization": "AMORTIZATION TABLE",
+    "tab.invoice": "INVOICE CALCULATOR",
     "header.loan-overview": "LOAN SIMULATOR",
     "header.loan-status": "CALCULATE PAID CAPITAL & PAID INTERESTS DURING A PERIOD",
     "header.loan-table": "GENERATE AMORTIZATION TABLE",
-    "header.amortization": "GENERATE AMORTIZATION TABLE",
+    "header.invoice-calculator": "INVOICE STEG",
 
     // Tab01 - Input labels
     "label.loan-amount": "Loan amount",
@@ -102,18 +102,39 @@ export const translations = {
     "print.period": "Period:",
     "print.start-date": "Start date:",
     "print.end-date": "End date:",
+
+    // Tab04 - Invoice Calculator
+    "invoice.billing-period": "Billing period (months):",
+    "invoice.electricity": "Electricity - Meter (kWh)",
+    "invoice.gas": "Gas - Meter (m³)",
+    "invoice.old-reading": "Old reading:",
+    "invoice.new-reading": "New reading:",
+    "invoice.consumption": "Consumption:",
+    "invoice.unit-price": "Unit price:",
+    "invoice.total-hf": "Total (excl. fixed costs):",
+    "invoice.total-ht": "Total (excl. tax):",
+    "invoice.fixed-costs": "Fixed costs:",
+    "invoice.tva-percent": "VAT (%):",
+    "invoice.tva-amount": "VAT amount:",
+    "invoice.cumul-ht": "Cumulative (excl. tax):",
+    "invoice.cumul-tva": "Cumulative VAT:",
+    "invoice.cl-rtt-fte": "CL + RTT + FTE:",
+    "invoice.total-taxes": "Total taxes:",
+    "invoice.grand-total": "TOTAL AMOUNT TO PAY:",
+    "invoice.taxes": "Total taxes",
+    "invoice.tax-info": "VAT electricity + gas:"
   },
 
   fr: {
     // Headers & sections
     "tab.simulator": "SIMULATEUR DE CRÉDIT",
-    "tab.calculator": "CALCULATEUR",
+    "tab.calculator": "CALCULATEUR DE CRÉDIT",
     "tab.table": "TABLEAUX DE CRÉDIT",
-    "tab.amortization": "TABLEAU D'AMORTISSEMENT",
+    "tab.invoice": "CALCULATEUR DE FACTURE",
     "header.loan-overview": "SIMULATEUR DE CRÉDIT",
     "header.loan-status": "CALCULER LE CAPITAL PAYÉ ET LES INTÉRÊTS PAYÉS PENDANT UNE PÉRIODE",
     "header.loan-table": "GÉNÉRER UN TABLEAU D'AMORTISSEMENT",
-    "header.amortization": "GÉNÉRER UN TABLEAU D'AMORTISSEMENT",
+    "header.invoice-calculator": "FACTURE STEG",
 
     // Tab01 - Input labels
     "label.loan-amount": "Montant du crédit",
@@ -206,18 +227,39 @@ export const translations = {
     "print.period": "Durée:",
     "print.start-date": "Date de début:",
     "print.end-date": "Date de fin:",
+
+    // Tab04 - Invoice Calculator
+    "invoice.billing-period": "Durée de facturation (mois):",
+    "invoice.electricity": "Électricité - Compteur (kWh)",
+    "invoice.gas": "Gaz - Compteur (m³)",
+    "invoice.old-reading": "Ancien relevé:",
+    "invoice.new-reading": "Nouveau relevé:",
+    "invoice.consumption": "Consommation:",
+    "invoice.unit-price": "Prix unitaire:",
+    "invoice.total-hf": "Total (hors frais fixes):",
+    "invoice.total-ht": "Total (hors taxes):",
+    "invoice.fixed-costs": "Frais fixes:",
+    "invoice.tva-percent": "TVA (%):",
+    "invoice.tva-amount": "Montant TVA:",
+    "invoice.cumul-ht": "Cumulé (hors taxes):",
+    "invoice.cumul-tva": "TVA cumulée:",
+    "invoice.cl-rtt-fte": "CL + RTT + FTE:",
+    "invoice.total-taxes": "Taxes totales:",
+    "invoice.grand-total": "MONTANT TOTAL A PAYER:",
+    "invoice.taxes": "Taxes totales",
+    "invoice.tax-info": "TVA électricité + gaz:"
   },
 
   nl: {
     // Headers & sections
     "tab.simulator": "LENING SIMULATOR",
-    "tab.calculator": "CALCULATOR",
+    "tab.calculator": "LENING CALCULATOR",
     "tab.table": "LENING TABELLEN",
-    "tab.amortization": "AFLOSSINGSTABEL",
+    "tab.invoice": "FACTUUR CALCULATOR",
     "header.loan-overview": "LENING SIMULATOR",
     "header.loan-status": "BEREKEN HET AFBETAALD KAPITAAL & DE BETAALDE RENTE TIJDENS EEN PERIODE",
     "header.loan-table": "GENEREER AFLOSSINGSTABEL",
-    "header.amortization": "GENEREER AFLOSSINGSTABEL",
+    "header.invoice-calculator": "FACTUUR STEG",
 
     // Tab01 - Input labels
     "label.loan-amount": "Te lenen bedrag",
@@ -310,5 +352,26 @@ export const translations = {
     "print.period": "Periode:",
     "print.start-date": "Startdatum:",
     "print.end-date": "Einddatum:",
+
+    // Tab04 - Invoice Calculator
+    "invoice.billing-period": "Factuurperiode (maanden):",
+    "invoice.electricity": "Elektriciteit - Meter (kWh)",
+    "invoice.gas": "Gas - Meter (m³)",
+    "invoice.old-reading": "Oude meterstand:",
+    "invoice.new-reading": "Nieuwe meterstand:",
+    "invoice.consumption": "Verbruik:",
+    "invoice.unit-price": "Eenheidsprijs:",
+    "invoice.total-hf": "Totaal (excl. vaste kosten):",
+    "invoice.total-ht": "Totaal (excl. belasting):",
+    "invoice.fixed-costs": "Vaste kosten:",
+    "invoice.tva-percent": "BTW (%):",
+    "invoice.tva-amount": "BTW bedrag:",
+    "invoice.cumul-ht": "Cumulatief (excl. belasting):",
+    "invoice.cumul-tva": "Cumulatieve BTW:",
+    "invoice.cl-rtt-fte": "CL + RTT + FTE:",
+    "invoice.total-taxes": "Totale belastingen:",
+    "invoice.grand-total": "Totaal te betalen bedrag:",
+    "invoice.taxes": "Totale belastingen",
+    "invoice.tax-info": "BTW elektriciteit + gas:"
   }
 };

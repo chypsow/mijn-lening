@@ -2,8 +2,9 @@
 import { createTab01 } from './tab01.js';
 import { createTab02 } from './tab02.js';
 import { createTab03 } from './tab03.js';
+import { createTab04 } from './tab04.js';
 import { translations } from './i18n.js';
-//import { prePopulate } from './devTools.js';
+//import { prePopulate, prePopulateInvoiceData } from './tools/devTools.js';
 
 // Current language
 let currentLang = localStorage.getItem('lang') || 'fr';
@@ -121,7 +122,7 @@ function createCircles() {
 
 function createTopHeader() {
     const header = el('nav', { id: 'topHeader', class: 'top-header no-print' });
-    const tabLabels = {'tab.simulator': t('tab.simulator'), 'tab.calculator': t('tab.calculator'), 'tab.table': t('tab.table')};
+    const tabLabels = {'tab.simulator': t('tab.simulator'), 'tab.calculator': t('tab.calculator'), 'tab.table': t('tab.table'), 'tab.invoice': t('tab.invoice')};
     header.setAttribute('role', 'tablist');
     Object.entries(tabLabels).forEach(([key, label], index) => {
         const tab = el('a', { href: '#', 'data-i18n': key, text: label, role: 'tab', 'aria-selected': index === activePage ? 'true' : 'false' });
@@ -317,13 +318,15 @@ document.addEventListener("DOMContentLoaded", () => {
     createTab01();
     createTab02();
     createTab03();
+    createTab04();
     $('main').appendChild(createFooter());
     renderTab(activePage + 1);
     //prePopulate();
+    //prePopulateInvoiceData();
 });
 
 export function renderTab(tabNumber) {
-    const tabs = [$('div#tab01'), $('div#tab02'), $('div#tab03')];
+    const tabs = [$('div#tab01'), $('div#tab02'), $('div#tab03'), $('div#tab04')];
     tabs.forEach((tab, index) => {
         if (index === tabNumber - 1) {
             tab.style.display = 'block';
