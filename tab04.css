@@ -33,6 +33,7 @@
     flex-direction: row;
     align-items: center;
     gap: 1rem;
+    margin: 0;
 }
 .results-section .input-group label {
     color: var(--text-color);

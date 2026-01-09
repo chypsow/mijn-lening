@@ -2,8 +2,8 @@ import { $, el, createHeader, createFmtCurrency, t } from './main.js';
 
 export function createTab04() {
     const tab04 = el('div', { id: 'tab04' });
-    const header = createHeader('header.invoice-calculator');
-    tab04.appendChild(header);
+    //const header = createHeader('header.invoice-calculator');
+    //tab04.appendChild(header);
     
     const content = el('div', { class: 'invoice-content' });
     
