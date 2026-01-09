@@ -122,7 +122,7 @@ export const translations = {
     "invoice.total-taxes": "Total taxes:",
     "invoice.grand-total": "TOTAL AMOUNT TO PAY:",
     "invoice.taxes": "Total taxes",
-    "invoice.tax-totals": "Total tax amounts:",
+    "invoice.tax-totals": "TOTAL TAX AMOUNTS:",
     "invoice.tax-info": "VAT electricity + gas:",
   },
 
@@ -248,7 +248,7 @@ export const translations = {
     "invoice.total-taxes": "Taxes totales:",
     "invoice.grand-total": "MONTANT TOTAL A PAYER:",
     "invoice.taxes": "Taxes totales",
-    "invoice.tax-totals": "Montants totaux des taxes:",
+    "invoice.tax-totals": "TOTAL TAXES:",
     "invoice.tax-info": "TVA électricité + gaz:"
   },
 
@@ -374,7 +374,7 @@ export const translations = {
     "invoice.total-taxes": "Totale belastingen:",
     "invoice.grand-total": "Totaal te betalen bedrag:",
     "invoice.taxes": "Totale belastingen",
-    "invoice.tax-totals": "Totale belastingbedragen:",
+    "invoice.tax-totals": "TOTALE BELASTINGEN:",
     "invoice.tax-info": "BTW elektriciteit + gas:"
   }
 };

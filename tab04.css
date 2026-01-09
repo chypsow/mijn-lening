@@ -250,23 +250,10 @@ input.tva-gas {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .invoice-section {
-        padding: 12px;
-        margin: 15px 0;
-    }
-
-    .invoice-section h3 {
-        font-size: 14px;
-    }
+   
 
     .result-row {
         flex-wrap: wrap;
         gap: 10px;
-    }
-
-    .btn-calculate,
-    .btn-export {
-        width: 100%;
-        margin: 10px 0;
     }
 }
