@@ -122,7 +122,7 @@ export const translations = {
     "invoice.total-taxes": "Total taxes:",
     "invoice.grand-total": "TOTAL AMOUNT TO PAY:",
     "invoice.taxes": "Total taxes",
-    "invoice.tax-info": "VAT electricity + gas:"
+    "invoice.tax-info": "VAT electricity + gas:",
   },
 
   fr: {

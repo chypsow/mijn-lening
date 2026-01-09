@@ -65,6 +65,11 @@ export function createTab04() {
         text: 'CL + RTT + FTE:'}, [
             el('span', { class: 'tax-item-rtt' }),
     ]));
+    taxSection.appendChild(el('div', { class: 'info-text  result-row',
+        'data-i18n': 'invoice.tax-total',
+        text: `${t('invoice.taxes')}:`}, [
+            el('span', { class: 'tax-item-total' }),
+        ]));
     content.appendChild(taxSection);
 
     // Calculate button
@@ -161,7 +166,7 @@ function createMeterSection(meterType, unit, defaultPrice, defaultTVA, defaultFi
     // TVA percent input
     const tvaGroup = el('div', { class: 'input-group' });
     tvaGroup.appendChild(el('label', { 'data-i18n': 'invoice.tva-percent', text: t('invoice.tva-percent') }));
-    const tvaInput = el('input', { type: 'number', class: `tva-${meterType}`, value: (defaultTVA * 100), step: '1' });
+    const tvaInput = el('input', { type: 'number', class: `tva-${meterType}`, value: (defaultTVA * 100).toFixed(2) , step: '1' });
     tvaGroup.appendChild(tvaInput);
     section.appendChild(tvaGroup);
     
@@ -235,6 +240,7 @@ export function calculateInvoice(tab04Container) {
     // Update tax display
     taxSection.querySelector('.tax-item-tva').textContent = fmtCurrency.format(totalTVA);
     taxSection.querySelector('.tax-item-rtt').textContent = fmtCurrency.format(elecCLRTTFTE);
+    taxSection.querySelector('.tax-item-total').textContent = fmtCurrency.format(totalTVA + elecCLRTTFTE);
 
     // Update grand total
     tab04Container.querySelector('#grandTotalValue').textContent = fmtCurrency.format(grandTotal);
