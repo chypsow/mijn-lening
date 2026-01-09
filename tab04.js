@@ -1,4 +1,4 @@
-import { $, el, createHeader, fmtCurrency, t } from './main.js';
+import { $, el, createHeader, createFmtCurrency, t } from './main.js';
 
 export function createTab04() {
     const tab04 = el('div', { id: 'tab04' });
@@ -32,7 +32,7 @@ export function createTab04() {
     }));
     const grandTotalValue = el('span', {
         id: 'grandTotalValue',
-        text: fmtCurrency.format(0)
+        text: createFmtCurrency('TND').format(0)
     });
     grandTotalDiv.appendChild(grandTotalValue);
     resultsSection.appendChild(grandTotalDiv);
@@ -56,19 +56,24 @@ export function createTab04() {
         'data-i18n': 'invoice.taxes',
         text: t('invoice.taxes')
     }));
-    taxSection.appendChild(el('div', { class: 'info-text  result-row',
-        'data-i18n': 'invoice.tax-info',
-        text: t('invoice.tax-info')}, [
-        el('span', { class: 'tax-item-tva' }),
+    taxSection.appendChild(el('div', { class: 'info-text  result-row'}, [
+        el('span', {
+            'data-i18n': 'invoice.tax-info',
+            text: t('invoice.tax-info')}),
+        el('span', { 
+            class: 'tax-item-tva' }),
     ]));
     taxSection.appendChild(el('div', { class: 'info-text  result-row',
         text: 'CL + RTT + FTE:'}, [
             el('span', { class: 'tax-item-rtt' }),
     ]));
-    taxSection.appendChild(el('div', { class: 'info-text  result-row',
-        'data-i18n': 'invoice.tax-total',
-        text: `${t('invoice.taxes')}:`}, [
-            el('span', { class: 'tax-item-total' }),
+    taxSection.appendChild(el('br'));
+    taxSection.appendChild(el('div', { class: 'info-text  result-row'}, [
+        el('span', {
+            'data-i18n': 'invoice.tax-totals',
+            text: t('invoice.tax-totals')}),
+        el('span', { 
+            class: 'tax-item-total' }),
         ]));
     content.appendChild(taxSection);
 
@@ -114,13 +119,13 @@ function createMeterSection(meterType, unit, defaultPrice, defaultTVA, defaultFi
     // Old & New readings
     const readingsDiv = el('div', { class: 'readings' });
     
-    const oldReadingGroup = el('div', { class: 'input-group' });
+    const oldReadingGroup = el('div', { class: 'input-group teller' });
     oldReadingGroup.appendChild(el('label', { 'data-i18n': 'invoice.old-reading', text: t('invoice.old-reading') }));
     const oldInput = el('input', { type: 'number', class: 'meter-old', step: '1' });
     oldReadingGroup.appendChild(oldInput);
     readingsDiv.appendChild(oldReadingGroup);
     
-    const newReadingGroup = el('div', { class: 'input-group' });
+    const newReadingGroup = el('div', { class: 'input-group teller' });
     newReadingGroup.appendChild(el('label', { 'data-i18n': 'invoice.new-reading', text: t('invoice.new-reading') }));
     const newInput = el('input', { type: 'number', class: 'meter-new', step: '1' });
     newReadingGroup.appendChild(newInput);
@@ -136,7 +141,7 @@ function createMeterSection(meterType, unit, defaultPrice, defaultTVA, defaultFi
     section.appendChild(consumptionDiv);
     
     // Unit price input
-    const priceGroup = el('div', { class: 'input-group' });
+    const priceGroup = el('div', { class: 'input-group inline' });
     priceGroup.appendChild(el('label', { 'data-i18n': 'invoice.unit-price', text: t('invoice.unit-price') }));
     const priceInput = el('input', { type: 'number', class: `price-${meterType}`, value: defaultPrice, step: '0.001' });
     priceGroup.appendChild(priceInput);
@@ -145,26 +150,26 @@ function createMeterSection(meterType, unit, defaultPrice, defaultTVA, defaultFi
     // Total HT display
     const totalHTDiv = el('div', { class: 'result-row' });
     totalHTDiv.appendChild(el('span', { 'data-i18n': 'invoice.total-hf', text: t('invoice.total-hf') }));
-    const totalHTValue = el('span', { class: `total-hf-${meterType}`, text: '0,00 €' });
+    const totalHTValue = el('span', { class: `total-hf-${meterType}`, text: '0,00 DT' });
     totalHTDiv.appendChild(totalHTValue);
     section.appendChild(totalHTDiv);
     
     // Fixed costs display
     const fixedDiv = el('div', { class: 'result-row' });
     fixedDiv.appendChild(el('span', { 'data-i18n': 'invoice.fixed-costs', text: t('invoice.fixed-costs') }));
-    const fixedValue = el('span', { class: `fixed-${meterType}`, text: '0,00 €' });
+    const fixedValue = el('span', { class: `fixed-${meterType}`, text: '0,00 DT' });
     fixedDiv.appendChild(fixedValue);
     section.appendChild(fixedDiv);
 
     // Total HT display
     const totalHTDiv2 = el('div', { class: 'result-row' });
     totalHTDiv2.appendChild(el('span', { 'data-i18n': 'invoice.total-ht', text: t('invoice.total-ht') }));
-    const totalHTValue2 = el('span', { class: `total-ht-${meterType}`, text: '0,00 €' });
+    const totalHTValue2 = el('span', { class: `total-ht-${meterType}`, text: '0,00 DT' });
     totalHTDiv2.appendChild(totalHTValue2);
     section.appendChild(totalHTDiv2);
     
     // TVA percent input
-    const tvaGroup = el('div', { class: 'input-group' });
+    const tvaGroup = el('div', { class: 'input-group inline' });
     tvaGroup.appendChild(el('label', { 'data-i18n': 'invoice.tva-percent', text: t('invoice.tva-percent') }));
     const tvaInput = el('input', { type: 'number', class: `tva-${meterType}`, value: (defaultTVA * 100).toFixed(2) , step: '1' });
     tvaGroup.appendChild(tvaInput);
@@ -173,7 +178,7 @@ function createMeterSection(meterType, unit, defaultPrice, defaultTVA, defaultFi
     // TVA amount display
     const tvaAmountDiv = el('div', { class: 'result-row' });
     tvaAmountDiv.appendChild(el('span', { 'data-i18n': 'invoice.tva-amount', text: t('invoice.tva-amount') }));
-    const tvaAmountValue = el('span', { class: `tva-amount-${meterType}`, text: '0,00 €' });
+    const tvaAmountValue = el('span', { class: `tva-amount-${meterType}`, text: '0,00 DT' });
     tvaAmountDiv.appendChild(tvaAmountValue);
     section.appendChild(tvaAmountDiv);
     
@@ -224,26 +229,26 @@ export function calculateInvoice(tab04Container) {
 
     // Update electricity display
     elecSection.querySelector('.consumption-electricity').textContent = elecConsumption.toFixed(2) + ' kWh';
-    elecSection.querySelector('.total-hf-electricity').textContent = fmtCurrency.format(elecTotalHT);
-    elecSection.querySelector('.fixed-electricity').textContent = fmtCurrency.format(elecFixed);
-    elecSection.querySelector('.total-ht-electricity').textContent = fmtCurrency.format(elecTotalHT + elecFixed);
-    elecSection.querySelector('.tva-amount-electricity').textContent = fmtCurrency.format(elecTVAAmount);
+    elecSection.querySelector('.total-hf-electricity').textContent = createFmtCurrency('TND').format(elecTotalHT);
+    elecSection.querySelector('.fixed-electricity').textContent = createFmtCurrency('TND').format(elecFixed);
+    elecSection.querySelector('.total-ht-electricity').textContent = createFmtCurrency('TND').format(elecTotalHT + elecFixed);
+    elecSection.querySelector('.tva-amount-electricity').textContent = createFmtCurrency('TND').format(elecTVAAmount);
     
     // Update gas display
     gasSection.querySelector('.consumption-gas').textContent = gasConsumption.toFixed(2) + ' m³';
-    gasSection.querySelector('.total-hf-gas').textContent = fmtCurrency.format(gasTotalHT);
-    gasSection.querySelector('.fixed-gas').textContent = fmtCurrency.format(gasFixed);
-    gasSection.querySelector('.total-ht-gas').textContent = fmtCurrency.format(gasTotalHT + gasFixed);
-    gasSection.querySelector('.tva-amount-gas').textContent = fmtCurrency.format(gasTVAAmount);
+    gasSection.querySelector('.total-hf-gas').textContent = createFmtCurrency('TND').format(gasTotalHT);
+    gasSection.querySelector('.fixed-gas').textContent = createFmtCurrency('TND').format(gasFixed);
+    gasSection.querySelector('.total-ht-gas').textContent = createFmtCurrency('TND').format(gasTotalHT + gasFixed);
+    gasSection.querySelector('.tva-amount-gas').textContent = createFmtCurrency('TND').format(gasTVAAmount);
     
 
     // Update tax display
-    taxSection.querySelector('.tax-item-tva').textContent = fmtCurrency.format(totalTVA);
-    taxSection.querySelector('.tax-item-rtt').textContent = fmtCurrency.format(elecCLRTTFTE);
-    taxSection.querySelector('.tax-item-total').textContent = fmtCurrency.format(totalTVA + elecCLRTTFTE);
+    taxSection.querySelector('.tax-item-tva').textContent = createFmtCurrency('TND').format(totalTVA);
+    taxSection.querySelector('.tax-item-rtt').textContent = createFmtCurrency('TND').format(elecCLRTTFTE);
+    taxSection.querySelector('.tax-item-total').textContent = createFmtCurrency('TND').format(totalTVA + elecCLRTTFTE);
 
     // Update grand total
-    tab04Container.querySelector('#grandTotalValue').textContent = fmtCurrency.format(grandTotal);
+    tab04Container.querySelector('#grandTotalValue').textContent = createFmtCurrency('TND').format(grandTotal);
 }
 
 function exportInvoiceData(tab04Container) {

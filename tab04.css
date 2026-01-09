@@ -45,7 +45,23 @@
     margin: 1rem 0;
     gap: 8px;
 }
-
+.input-group.inline {
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+.input-group.teller input{
+    background-color: #fffacd;
+}
+/* Yellow input highlights */
+/*input.meter-old,
+input.meter-new,
+input.price-electricity,
+input.price-gas,
+input.tva-electricity,
+input.tva-gas {
+    background-color: #fffacd !important;
+}*/
 .input-group label {
     color: var(--label-color);
     font-size: 1.1rem;
@@ -230,15 +246,7 @@
     box-shadow: 0 4px 8px rgba(33, 150, 243, 0.3);
 }
 
-/* Yellow input highlights */
-/*input.meter-old,
-input.meter-new,
-input.price-electricity,
-input.price-gas,
-input.tva-electricity,
-input.tva-gas {
-    background-color: #fffacd !important;
-}*/
+
 
 /* Responsive */
 @media (max-width: 768px) {
