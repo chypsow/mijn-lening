@@ -4,7 +4,7 @@ import { createTab02 } from './tab02.js';
 import { createTab03 } from './tab03.js';
 import { createTab04 } from './tab04.js';
 import { translations } from './i18n.js';
-//import { prePopulate, prePopulateInvoiceData } from './tools/devTools.js';
+import { prePopulate, prePopulateInvoiceData } from './tools/devTools.js';
 
 // Current language
 let currentLang = localStorage.getItem('lang') || 'fr';
@@ -322,7 +322,7 @@ document.addEventListener("DOMContentLoaded", () => {
     $('main').appendChild(createFooter());
     renderTab(activePage + 1);
     //prePopulate();
-    //prePopulateInvoiceData();
+    prePopulateInvoiceData();
 });
 
 export function renderTab(tabNumber) {
