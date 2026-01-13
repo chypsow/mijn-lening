@@ -76,7 +76,7 @@ function createCalculatorDOM() {
 }
 
 function createBerekenButton() {
-    return el('button', { id: 'berekenBtn-2', class: 'accented-btn', "data-i18n": "button.calculate", text: t('button.calculate') });
+    return el('button', { id: 'berekenBtn-2', class: 'accented-btn no-print', "data-i18n": "button.calculate", text: t('button.calculate') });
 }
 
 function createOverzicht() {

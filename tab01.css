@@ -62,7 +62,7 @@
 .import-export-buttons button:hover{ cursor: pointer; filter: brightness(0.9); }
 
 /* Form section */
-section{
+.main-section{
     margin-bottom: 1.5rem ;
     display: flex;
     flex-direction: column;

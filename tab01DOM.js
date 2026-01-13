@@ -17,19 +17,19 @@ function createTopRow() {
         ]);
     }
     function createImportExportButtons() {
-        return el("div", { class: "import-export-buttons" }, [
+        return el("div", { class: "import-export-buttons no-print" }, [
             el("button", { id: "importBtn", "data-i18n": "button.import", text: t('button.import') }),
             el("button", { id: "exportBtn", "data-i18n": "button.export", text: t('button.export') })
         ]);
     }
-    return el("div", { class: "top-row no-print" }, [
+    return el("div", { class: "top-row" }, [
         createCurrecyInput(),
         createImportExportButtons()
     ]);
 }
 
 function createMainSection() {
-    return el("section", { class: "no-print" }, [
+    return el("section", { class: "main-section" }, [
         createInputFieldset(),
         createBerekenButton(),
         createSummaryFieldset()
@@ -37,7 +37,7 @@ function createMainSection() {
 }
 
 function createBerekenButton() {
-    return el('button', { id: 'berekenBtn-1', class: 'accented-btn', "data-i18n": "button.calculate", text: t('button.calculate') });
+    return el('button', { id: 'berekenBtn-1', class: 'accented-btn no-print', "data-i18n": "button.calculate", text: t('button.calculate') });
 }
 
 function createInputFieldset() {
