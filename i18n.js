@@ -116,8 +116,6 @@ export const translations = {
     "invoice.fixed-costs": "Fixed costs:",
     "invoice.tva-percent": "VAT:",
     "invoice.tva-amount": "VAT amount:",
-    //"invoice.cumul-ht": "Cumulative (excl. tax):",
-    //"invoice.cumul-tva": "Cumulative VAT:",
     "invoice.cl-rtt-fte": "CL + RTT + FTE:",
     "invoice.total-taxes": "Total taxes:",
     "invoice.grand-total": "TOTAL AMOUNT TO PAY:",
@@ -129,7 +127,8 @@ export const translations = {
     "invoice.totals": "Totals",
     "invoice.elect-ht": "Electricity excl. tax:",
     "invoice.gas-ht": "Gas excl. tax:",
-    "invoice.totals-ht": "TOTAL Elect + Gas (excl. tax):"
+    "invoice.totals-ht": "TOTAL Elect + Gas (excl. tax):",
+    "invoice.billing-period-months": " month(s)"
   },
 
   fr: {
@@ -248,8 +247,6 @@ export const translations = {
     "invoice.fixed-costs": "Frais fixes:",
     "invoice.tva-percent": "TVA:",
     "invoice.tva-amount": "Montant TVA:",
-    //"invoice.cumul-ht": "Cumulé (hors taxes):",
-    //"invoice.cumul-tva": "TVA cumulée:",
     "invoice.cl-rtt-fte": "CL + RTT + FTE:",
     "invoice.total-taxes": "Taxes totales:",
     "invoice.grand-total": "MONTANT TOTAL A PAYER:",
@@ -261,7 +258,8 @@ export const translations = {
     "invoice.totals": "Totaux",
     "invoice.elect-ht": "Électricité (H.T.):",
     "invoice.gas-ht": "Gaz (H.T.):",
-    "invoice.totals-ht": "TOTAL Élect + Gaz (H.T.):"
+    "invoice.totals-ht": "TOTAL Élect + Gaz (H.T.):",
+    "invoice.billing-period-months": " mois"
   },
 
   nl: {
@@ -380,8 +378,6 @@ export const translations = {
     "invoice.fixed-costs": "Vaste kosten:",
     "invoice.tva-percent": "BTW:",
     "invoice.tva-amount": "BTW bedrag:",
-    //"invoice.cumul-ht": "Cumulatief (excl. belasting):",
-    //"invoice.cumul-tva": "Cumulatieve BTW:",
     "invoice.cl-rtt-fte": "CL + RTT + FTE:",
     "invoice.total-taxes": "Totale belastingen:",
     "invoice.grand-total": "Totaal te betalen bedrag:",
@@ -393,6 +389,7 @@ export const translations = {
     "invoice.totals": "Totalen",
     "invoice.elect-ht": "Elektriciteit excl. BTW:",
     "invoice.gas-ht": "Gas excl. BTW:",
-    "invoice.totals-ht": "TOTAAL Elect + Gas (excl. BTW):"
+    "invoice.totals-ht": "TOTAAL Elect + Gas (excl. BTW):",
+    "invoice.billing-period-months": " maand(en)"
   }
 };

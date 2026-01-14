@@ -11,9 +11,19 @@ export function createTab04() {
     const resultsSection = el('div', { class: 'results-section' });
     const billingPeriodContainer = el('div', { class: 'billing-period-container' });
     resultsSection.appendChild(billingPeriodContainer);
-    billingPeriodContainer.appendChild(el('h3', {
+    const billingPeriodHeader = el('div', { class: 'billing-period-header' });
+    billingPeriodContainer.appendChild(billingPeriodHeader);
+    billingPeriodHeader.appendChild(el('h3', {
         'data-i18n': 'invoice.billing-period',
         text: t('invoice.billing-period')
+    }));
+    billingPeriodHeader.appendChild(el('span', {
+        class: 'billing-period-info number-of-months hidden',
+    }));
+    billingPeriodHeader.appendChild(el('span', {
+        'data-i18n': 'invoice.billing-period-months',
+        text: t('invoice.billing-period-months'),
+        class: 'billing-period-info hidden'
     }));
     const billingPeriodSelect = el('select', { class: 'billing-period-select', id: 'billingPeriodSelect' }, [
         el('option', { value: 'months', text: t('invoice.number-of-months'), 'data-i18n': 'invoice.number-of-months' }),
@@ -221,7 +231,7 @@ export function createTab04() {
     } else {
         billingPeriodGroup.appendChild(createBillingPeriodDatesGroup());
     }
-
+    calculateInvoice(tab04);
     // select change for billing period type
     billingPeriodSelect.addEventListener('change', () => {
         const billingPeriodGroup = tab04.querySelector('.billing-period-group');
@@ -359,14 +369,26 @@ export function calculateInvoice(tab04Container) {
         const endDate = new Date(endDateInput.value);
         if (isNaN(startDate.getTime()) || isNaN(endDate.getTime()) || endDate <= startDate) {
             //
+            tab04Container.querySelectorAll('.billing-period-info').forEach(span => {
+                span.classList.add('hidden');
+            });
+            resetResultsInvoice(tab04Container);
             console.log('Invalid dates for billing period - 2');
             return;
         }
         const diffTime = Math.abs(endDate - startDate);
         const diffMonths = Math.round(diffTime / (1000 * 60 * 60 * 24 * 30.44));
         billingPeriodValue = diffMonths;
+        tab04Container.querySelector('.number-of-months').textContent = billingPeriodValue;
+        tab04Container.querySelectorAll('.billing-period-info').forEach(span => {
+            span.classList.remove('hidden');
+        });
     } else {
         billingPeriodValue = parseFloat(billingPeriod.value) || 1;
+        tab04Container.querySelector('.number-of-months').textContent = billingPeriodValue;
+        tab04Container.querySelectorAll('.billing-period-info').forEach(span => {
+            span.classList.remove('hidden');
+        });
     }
     //console.log({billingPeriodValue});
     
