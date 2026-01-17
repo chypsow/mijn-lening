@@ -195,8 +195,6 @@ function createThemeMenuButton() {
             closeThemePopup();
         } else {
             openThemePopup();
-            // Toggle topHeader on small screens
-            toggleTopHeader();
         }
         
     });
@@ -274,6 +272,8 @@ function openThemePopup() {
             btn.setAttribute('aria-expanded', 'true');
             btn.innerHTML = '✕';
             btn.classList.add('open');
+            toggleTopHeader();
+            toggleLangSelect(true);
         }
     }
 }
@@ -288,10 +288,20 @@ function closeThemePopup() {
             btn.innerHTML = '☰';
             btn.classList.remove('open');
             closeTopHeader();
+            toggleLangSelect(false);
         }
     }
 }
-
+function toggleLangSelect(visible) {
+    const langSelect = document.getElementById('lang-select');
+    if (langSelect) {
+        if (visible) {
+            langSelect.classList.add("visible");
+        } else {
+            langSelect.classList.remove("visible");
+        }
+    }
+}
 function toggleTopHeader() {
     const topHeader = document.getElementById('topHeader');
     if (topHeader) {

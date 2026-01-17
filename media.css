@@ -17,7 +17,7 @@
     :root { --top-fixed-position: .5rem; }
     .theme-btn-popup{ width: 20px; height: 20px; }
     .theme-popup{ gap: .75rem; padding-top: .7rem;}
-    .top-header {flex-direction: column; gap:0; display: none; position: fixed; top: 3.5rem; left: 0; right: 0; width: 100%; background: rgba(63, 63, 63, 0.74); z-index: 1003; }
+    .top-header {flex-direction: column; gap:0; display: none; position: fixed; top: 3.5rem; left: 0; right: 0; width: 100%; background: rgba(52, 61, 92, 0.781); z-index: 1003; }
     .top-header.active { display: flex; }
     .top-header a { text-align: left; padding: .75rem; }
     .annual-report-table thead { top: 7.7rem; }
