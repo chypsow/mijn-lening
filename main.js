@@ -1,18 +1,49 @@
 
+import { translations } from './i18n.js';
 import { createTab01 } from './tab01.js';
 import { createTab02 } from './tab02.js';
 import { createTab03 } from './tab03.js';
 import { createTab04 } from './tab04.js';
-import { translations } from './i18n.js';
-//import { prePopulate } from './tools/devTools.js';
+
+// Main tabs
+const tabCreators = new Map([
+    ['tab01', { label: 'tab.simulator', creator: createTab01 }],
+    ['tab02', { label: 'tab.calculator', creator: createTab02 }],
+    ['tab03', { label: 'tab.table', creator: createTab03 }],
+    ['tab04', { label: 'tab.invoice', creator: createTab04 }]
+]);
+
+// Helper functions
+const getTabIds = () => Array.from(tabCreators.keys());
+const getTabLabel = (tabId) => tabCreators.get(tabId)?.label;
+const getTabCreator = (tabId) => tabCreators.get(tabId)?.creator;
 
 // Current language
 let currentLang = localStorage.getItem('lang') || 'fr';
 export let activePage = localStorage.getItem('activePage') ? parseInt(localStorage.getItem('activePage')) : 0;
+if (isNaN(activePage) || activePage < 0 || activePage >= tabCreators.size) {
+    activePage = 0;
+}
+
+// Utility functions for DOM manipulation and formatting
 export const $ = selector => document.querySelector(selector);
 export const $all = selector => Array.from(document.querySelectorAll(selector));
+export const  el = (tag, options = {}, children = []) => {
+    const element = document.createElement(tag);
 
-// Get currency for a country
+    Object.entries(options).forEach(([key, value]) => {
+        if (key === "class") element.className = value;
+        else if (key === "id") element.id = value;
+        else if (key === "text") element.textContent = value;
+        else if (key === "html") element.innerHTML = value;
+        else if (typeof value === 'boolean') element[key] = value;
+        else element.setAttribute(key, value);
+    });
+
+    children.forEach(child => element.appendChild(child));
+    return element;
+}
+
 export function getCurrency (){
     return localStorage.getItem('currency') || 'EUR';
 }
@@ -48,23 +79,6 @@ export function formatLocalDate(date) {
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     return `${year}-${month}-${day}`;
-}
-//export const fmtPercent = new Intl.NumberFormat("nl-BE", { style: "percent", maximumFractionDigits: 4 });
-
-export const  el = (tag, options = {}, children = []) => {
-    const element = document.createElement(tag);
-
-    Object.entries(options).forEach(([key, value]) => {
-        if (key === "class") element.className = value;
-        else if (key === "id") element.id = value;
-        else if (key === "text") element.textContent = value;
-        else if (key === "html") element.innerHTML = value;
-        else if (typeof value === 'boolean') element[key] = value;
-        else element.setAttribute(key, value);
-    });
-
-    children.forEach(child => element.appendChild(child));
-    return element;
 }
 
 // Translation function
@@ -122,9 +136,12 @@ function createCircles() {
 
 function createTopHeader() {
     const header = el('nav', { id: 'topHeader', class: 'top-header no-print' });
-    const tabLabels = {'tab.simulator': t('tab.simulator'), 'tab.calculator': t('tab.calculator'), 'tab.table': t('tab.table'), 'tab.invoice': t('tab.invoice')};
+
+    const tabIds = getTabIds();
     header.setAttribute('role', 'tablist');
-    Object.entries(tabLabels).forEach(([key, label], index) => {
+    tabIds.forEach((tabId, index) => {
+        const key = getTabLabel(tabId);
+        const label = t(key);
         const tab = el('a', { href: '#', 'data-i18n': key, text: label, role: 'tab', 'aria-selected': index === activePage ? 'true' : 'false' });
         if (index === activePage) {
             tab.classList.add('active');
@@ -331,26 +348,28 @@ function createMainContent() {
     main.appendChild(createThemeMenuButton());
     main.appendChild(createThemeSelector());
 }
-    
+
 /* Initialize */
 document.addEventListener("DOMContentLoaded", () => {
     createMainContent();
-    createTab01();
-    createTab02();
-    createTab03();
-    createTab04();
+    getTabIds().forEach(tabId => {
+        const creator = getTabCreator(tabId);
+        if (typeof creator === 'function') creator();
+    });
     $('main').appendChild(createFooter());
     renderTab(activePage + 1);
-    //prePopulate();
 });
 
 export function renderTab(tabNumber) {
-    const tabs = [$('div#tab01'), $('div#tab02'), $('div#tab03'), $('div#tab04')];
-    tabs.forEach((tab, index) => {
-        if (index === tabNumber - 1) {
-            tab.style.display = 'block';
-        } else {
-            tab.style.display = 'none';
+    const tabIds = getTabIds();
+    tabIds.forEach((tabId, index) => {
+        const tab = document.getElementById(tabId);
+        if (tab) {
+            if (index === tabNumber - 1) {
+                tab.style.display = 'block';
+            } else {
+                tab.style.display = 'none';
+            }   
         }
     });
 }
