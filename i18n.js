@@ -128,7 +128,9 @@ export const translations = {
     "invoice.elect-ht": "Electricity excl. tax:",
     "invoice.gas-ht": "Gas excl. tax:",
     "invoice.totals-ht": "TOTAL Elect + Gas (excl. tax):",
-    "invoice.billing-period-months": " month(s)"
+    "invoice.billing-period-months": " month(s)",
+    "invoice.power": "POWER:",
+    "invoice.flow": "FLOW:"
   },
 
   fr: {
@@ -259,7 +261,9 @@ export const translations = {
     "invoice.elect-ht": "Électricité (H.T.):",
     "invoice.gas-ht": "Gaz (H.T.):",
     "invoice.totals-ht": "TOTAL Élect + Gaz (H.T.):",
-    "invoice.billing-period-months": " mois"
+    "invoice.billing-period-months": " mois",
+    "invoice.power": "PUISSANCE:",
+    "invoice.flow": "DÉBIT:"
   },
 
   nl: {
@@ -390,6 +394,8 @@ export const translations = {
     "invoice.elect-ht": "Elektriciteit excl. BTW:",
     "invoice.gas-ht": "Gas excl. BTW:",
     "invoice.totals-ht": "TOTAAL Elect + Gas (excl. BTW):",
-    "invoice.billing-period-months": " maand(en)"
+    "invoice.billing-period-months": " maand(en)",
+    "invoice.power": "VERMOGEN:",
+    "invoice.flow": "DEBIET:"
   }
 };

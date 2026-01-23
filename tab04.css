@@ -109,7 +109,7 @@
 .input-group {
     display: flex;
     flex-direction: column;
-    margin: 1rem 0;
+    margin-top: 0.5rem;
     gap: 8px;
 }
 .input-group.inline {
@@ -132,16 +132,22 @@
     font-family: var(--font-mono);
     width: 6rem;
 }
+.input-group.inline label {
+    font-weight: 600;
+}
 .input-group.teller input{
     font-size: 1.2rem;
 }
-
+.input-group.teller label {
+    padding-left: 0.5rem;
+}
 .input-group label, .input-group span {
     color: var(--label-color);
     font-size: 1rem;
 }
 .input-group span {
     font-weight: 600;
+    font-family: var(--font-sans);
 }
 .input-group input:focus {
     outline: none;

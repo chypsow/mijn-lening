@@ -50,7 +50,7 @@ export function getCurrency (){
 
 // Create dynamic currency formatter
 export function createFmtCurrency(currency = 'EUR') {
-    return currency === 'TND' ? new Intl.NumberFormat("fr-TN", { style: "currency", currency: "TND", maximumFractionDigits: 2 }) : new Intl.NumberFormat("fr-FR", { style: "currency", currency: currency, maximumFractionDigits: 2 });
+    return currency === 'TND' ? new Intl.NumberFormat("fr-TN", { style: "currency", currency: "TND", maximumFractionDigits: 3 }) : new Intl.NumberFormat("fr-FR", { style: "currency", currency: currency, maximumFractionDigits: 2 });
 }
 
 // Currency state object

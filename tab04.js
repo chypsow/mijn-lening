@@ -61,12 +61,12 @@ export function createTab04() {
     content.appendChild(meterSectionsDiv);
 
     // Electricity section
-    const elecSection = createMeterSection('electricity', 'kWh', 0.176, 0.07, 4.9);
+    const elecSection = createMeterSection('electricity', 'power');
     meterSectionsDiv.appendChild(elecSection);
     elecSection.addEventListener('click', replaceSpanWithInput);
     
     // Gas section
-    const gasSection = createMeterSection('gas', 'm³', 0.231, 0.19, 0.75);
+    const gasSection = createMeterSection('gas', 'flow');
     meterSectionsDiv.appendChild(gasSection);
     gasSection.addEventListener('click', replaceSpanWithInput);
     
@@ -156,13 +156,13 @@ export function createTab04() {
         
         const meterSection = e.currentTarget;
         const meterType = meterSection.getAttribute('data-meter-type');
-        const priceOrTVA = elt.classList.contains('price-electricity') || elt.classList.contains('price-gas') ? 'price' : 'tva';
+        const powerOrFlow = meterType === 'electricity' ? 'power' : 'flow';
 
-        const currentValue = meterSection.getAttribute(`data-${priceOrTVA}`);
+        const currentValue = meterSection.getAttribute(`data-${powerOrFlow}`);
         const input = el('input', {
             type: 'number',
-            step: `${priceOrTVA === 'price' ? '0.001' : '0.01'}`,
-            class: `${priceOrTVA}-${meterType}` // no editable class here otherwise infinite loop
+            step: '1',
+            class: `${powerOrFlow}-${meterType}` // no editable class here otherwise infinite loop
         });
         elt.replaceWith(input);
         input.value = currentValue;
@@ -175,7 +175,7 @@ export function createTab04() {
         });
 
         input.addEventListener('change', () => {
-            meterSection.setAttribute(`data-${priceOrTVA}`, parseFloat(input.value));
+            meterSection.setAttribute(`data-${powerOrFlow}`, parseFloat(input.value) || 0);
             calculateInvoice(tab04);
         });
         
@@ -184,9 +184,9 @@ export function createTab04() {
             if (isNaN(newValue)) {
                 newValue = parseFloat(currentValue);
             }
-            const newSpan = el('span', { class: `${priceOrTVA}-${meterType} editable`, text: `${priceOrTVA === 'price' ? newValue + ' DT' : (newValue * 100).toFixed(2) + ' %'}` });
+            const newSpan = el('span', { class: `${powerOrFlow}-${meterType} editable`, text: `${newValue} ${powerOrFlow === 'power' ? 'kva' : 'm³'}` });
             input.replaceWith(newSpan);
-            meterSection.setAttribute(`data-${priceOrTVA}`, newValue);
+            meterSection.setAttribute(`data-${powerOrFlow}`, newValue);
         });
     }
 
@@ -292,13 +292,12 @@ function resetResultsInvoice(tab04Container) {
     });
 }
 
-function createMeterSection(meterType, unit, defaultPrice, defaultTVA, defaultFixed) {
+function createMeterSection(meterType, quantityType, defaultPower = 7, defaultFlow = 5) {
     const section = el('div', { 
         class: `invoice-section meter-${meterType}`,
-        'data-meter-type': meterType, 
-        'data-price': defaultPrice, 
-        'data-tva': defaultTVA, 
-        'data-fixed': defaultFixed 
+        'data-meter-type': meterType,
+        'data-power' : quantityType === 'power' ? defaultPower : '',
+        'data-flow' : quantityType === 'flow' ? defaultFlow : ''
     });
     
     const title = el('h3', {
@@ -307,9 +306,20 @@ function createMeterSection(meterType, unit, defaultPrice, defaultTVA, defaultFi
     });
     section.appendChild(title);
     
+    const unit = quantityType === 'power' ? 'kva' : 'm³';
+    
+    // Power - flow input
+    const powerGroup = el('div', { class: 'input-group inline' });
+    powerGroup.appendChild(el('label', { 'data-i18n': `invoice.${quantityType}`, text: t(`invoice.${quantityType}`) }));
+    const powerInput = el('span', { class: `${quantityType}-${meterType} editable`, text: `${quantityType === 'power' ? defaultPower : defaultFlow} ${unit}` });
+    powerGroup.appendChild(powerInput);
+    const powerEditableLabel = el('span', { text: 'Editable', class: 'editable-label no-print' });
+    powerGroup.appendChild(powerEditableLabel);
+    section.appendChild(powerGroup);
+
     // Old & New readings
     const readingsDiv = el('div', { class: 'readings' });
-    
+
     const oldReadingGroup = el('div', { class: 'input-group teller' });
     oldReadingGroup.appendChild(el('label', { 'data-i18n': 'invoice.old-reading', text: t('invoice.old-reading') }));
     const oldInput = el('input', { type: 'number', class: 'meter-old', step: '1' });
@@ -334,10 +344,8 @@ function createMeterSection(meterType, unit, defaultPrice, defaultTVA, defaultFi
     // Unit price input
     const priceGroup = el('div', { class: 'input-group inline' });
     priceGroup.appendChild(el('label', { 'data-i18n': 'invoice.unit-price', text: t('invoice.unit-price') }));
-    const priceInput = el('span', {class: `price-${meterType} editable`, text: `${defaultPrice} DT` });
+    const priceInput = el('span', { class: `price-${meterType}` });
     priceGroup.appendChild(priceInput);
-    const editableLabel = el('span', { text: 'Editable', class: 'editable-label no-print' });
-    priceGroup.appendChild(editableLabel);
     section.appendChild(priceGroup);
     
     // Total HT display
@@ -364,10 +372,8 @@ function createMeterSection(meterType, unit, defaultPrice, defaultTVA, defaultFi
     // TVA percent input
     const tvaGroup = el('div', { class: 'input-group inline' });
     tvaGroup.appendChild(el('label', { 'data-i18n': 'invoice.tva-percent', text: t('invoice.tva-percent') }));
-    const tvaInput = el('span', { class: `tva-${meterType} editable`, text: `${(defaultTVA * 100).toFixed(2)} %` });
+    const tvaInput = el('span', { class: `tva-${meterType}`, text: '19 %' });
     tvaGroup.appendChild(tvaInput);
-    const tvaEditableLabel = el('span', { text: 'Editable', class: 'editable-label no-print' });
-    tvaGroup.appendChild(tvaEditableLabel);
     section.appendChild(tvaGroup);
     
     // TVA amount display
@@ -423,17 +429,42 @@ export function calculateInvoice(tab04Container) {
     const elecOld = parseFloat(elecSection.querySelector('.meter-old').value) || 0;
     const elecNew = parseFloat(elecSection.querySelector('.meter-new').value) || 0;
     const elecConsumption = elecNew - elecOld;
-    const elecPrice = parseFloat(elecSection.getAttribute('data-price')) || 0.176;
-    const elecTVAPercent = parseFloat(elecSection.getAttribute('data-tva')) || 0.07;
-    const elecFixedCosts = parseFloat(elecSection.getAttribute('data-fixed')) || 4.9;
+    const power = parseFloat(elecSection.getAttribute('data-power')) || 7;
+    const averageConsumption = elecConsumption / billingPeriodValue;
+
+    const elecPriceCalc = () => {
+        if (averageConsumption <= 200) return 0.176;
+        if (averageConsumption <= 300) return 0.218;
+        if (averageConsumption <= 500) return 0.341;
+        return 0.414;
+    }
+    const elecTVAPercentCalc = () => {
+        if (averageConsumption <= 300) return 0.07;
+        return 0.13;
+    }
+    
+    const elecPrice = elecPriceCalc();
+    const elecTVAPercent = elecTVAPercentCalc();
+    const elecFixedCosts = power * 0.7 * billingPeriodValue;
     
     // Gas calculations
     const gasOld = parseFloat(gasSection.querySelector('.meter-old').value) || 0;
     const gasNew = parseFloat(gasSection.querySelector('.meter-new').value) || 0;
     const gasConsumption = gasNew - gasOld;
-    const gasPrice = parseFloat(gasSection.getAttribute('data-price')) || 0.231;
-    const gasTVAPercent = parseFloat(gasSection.getAttribute('data-tva')) || 0.19;
-    const gasFixedCosts = parseFloat(gasSection.getAttribute('data-fixed')) || 0.75;
+    const flow = parseFloat(gasSection.getAttribute('data-flow')) || 5;
+    const averageConsumptionGas = gasConsumption / billingPeriodValue;
+
+    const gasPriceCalc = () => {
+        if (averageConsumptionGas <= 30) return 0.231;
+        if (averageConsumptionGas <= 60) return 0.341;
+        if (averageConsumptionGas <= 150) return 0.447;
+        return 0.557;
+    }
+
+    const gasPrice = gasPriceCalc();
+    const gasFixedCosts = flow * 0.75 * billingPeriodValue;
+    
+    const gasTVAPercent = 0.19;
     
     // Electricity calculations
     const elecTotalHT = (elecConsumption * elecPrice);
@@ -453,16 +484,20 @@ export function calculateInvoice(tab04Container) {
 
     // Update electricity display
     elecSection.querySelector('.consumption-electricity').textContent = elecConsumption.toFixed(0) + ' kWh';
+    elecSection.querySelector('.price-electricity').textContent = createFmtCurrency('TND').format(elecPrice);
     elecSection.querySelector('.total-hf-electricity').textContent = createFmtCurrency('TND').format(elecTotalHT);
     elecSection.querySelector('.fixed-electricity').textContent = createFmtCurrency('TND').format(elecFixed);
     elecSection.querySelector('.total-ht-electricity').textContent = createFmtCurrency('TND').format(elecTotalHT + elecFixed);
+    elecSection.querySelector('.tva-electricity').textContent = (elecTVAPercent * 100).toFixed(0) + ' %';
     elecSection.querySelector('.tva-amount-electricity').textContent = createFmtCurrency('TND').format(elecTVAAmount);
     
     // Update gas display
     gasSection.querySelector('.consumption-gas').textContent = gasConsumption.toFixed(0) + ' m³';
+    gasSection.querySelector('.price-gas').textContent = createFmtCurrency('TND').format(gasPrice);
     gasSection.querySelector('.total-hf-gas').textContent = createFmtCurrency('TND').format(gasTotalHT);
     gasSection.querySelector('.fixed-gas').textContent = createFmtCurrency('TND').format(gasFixed);
     gasSection.querySelector('.total-ht-gas').textContent = createFmtCurrency('TND').format(gasTotalHT + gasFixed);
+    //gasSection.querySelector('.tva-gas').textContent = (gasTVAPercent * 100).toFixed(0) + ' %';
     gasSection.querySelector('.tva-amount-gas').textContent = createFmtCurrency('TND').format(gasTVAAmount);
     
 
