@@ -104,7 +104,7 @@ export const translations = {
     "print.end-date": "End date:",
 
     // Tab04 - Invoice Calculator
-    "invoice.billing-period": "Number of months:",
+    "invoice.billing-period": "Billing duration:",
     "invoice.electricity": "Electricity - Counter (kWh)",
     "invoice.gas": "Gas - Counter (m³)",
     "invoice.old-reading": "Old reading:",
@@ -256,7 +256,7 @@ export const translations = {
     "print.end-date": "Date de fin:",
 
     // Tab04 - Invoice Calculator
-    "invoice.billing-period": "Nombre de mois:",
+    "invoice.billing-period": "Durée de facturation:",
     "invoice.electricity": "Électricité - Compteur (kWh)",
     "invoice.gas": "Gaz - Compteur (m³)",
     "invoice.old-reading": "Ancien relevé:",
@@ -408,7 +408,7 @@ export const translations = {
     "print.end-date": "Einddatum:",
 
     // Tab04 - Invoice Calculator
-    "invoice.billing-period": "Aantal maanden:",
+    "invoice.billing-period": "Factureringsduur:",
     "invoice.electricity": "Elektriciteit - Teller (kWh)",
     "invoice.gas": "Gas - Teller (m³)",
     "invoice.old-reading": "Oude meterstand:",
