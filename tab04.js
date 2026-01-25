@@ -728,6 +728,11 @@ function exportInvoiceData() {
     }
 
     // Electricity
+    const power = localStorage.getItem('invoiceElectricityPower') || '7';
+    // Gas
+    const flow = localStorage.getItem('invoiceGasFlow') || '5';
+
+    // Electricity
     const elecOld = tab04Container.querySelector('.meter-old').value;
     const elecNew = tab04Container.querySelectorAll('.meter-new')[0].value;
     const elecConsumption = tab04Container.querySelector('.consumption-electricity').textContent;
@@ -756,7 +761,7 @@ function exportInvoiceData() {
     const grandTotalValue = tab04Container.querySelector('#grandTotalValue').textContent;
     
     const csvPayload = `
-        **Facture-STEG**\n\nDurée de facturation (mois);${billingPeriod}\nPeriode de facturation;${billingPeriodInfo}\n\n**Electricité**\nAncien indexe;${elecOld}\nNouveau indexe;${elecNew}\nConsommation;${(elecConsumption)}\nPrix unitaire;${elecPrice}\nRedevances fixes;${elecFixed}\nTotal excl. TVA;${elecTotalHT}\nTVA %;${elecTVAPer}\n\n**Gaz**\nAncien indexe;${gasOld}\nNouveau indexe;${gasNew}\nConsommation;${(gasConsumption)}\nPrix unitaire;${gasPrice}\nRedevances fixes;${gasFixed}\nTotal excl. TVA;${gasTotalHT}\nTVA %;${gasTVAPer}\n\n**Taxes et contributions**\nContribution CL;${taxCL}\nContribution FTE;${taxFTE}\nContribution RTT;${taxRTT}\nTVA;${taxTVA}\nTotal des taxes et contributions;${taxTotal}\n\n**Montant total de la facture**;${grandTotalValue}
+        **Facture-STEG**\n\nDurée de facturation (mois);${billingPeriod}\nPeriode de facturation;${billingPeriodInfo}\n\n**Electricité**\nPuissance du compteur;${power} kVA\nAncien indexe;${elecOld}\nNouveau indexe;${elecNew}\nConsommation;${(elecConsumption)}\nPrix unitaire;${elecPrice}\nRedevances fixes;${elecFixed}\nTotal excl. TVA;${elecTotalHT}\nTVA %;${elecTVAPer}\n\n**Gaz**\nDébit du compteur;${flow} m³\nAncien indexe;${gasOld}\nNouveau indexe;${gasNew}\nConsommation;${(gasConsumption)}\nPrix unitaire;${gasPrice}\nRedevances fixes;${gasFixed}\nTotal excl. TVA;${gasTotalHT}\nTVA %;${gasTVAPer}\n\n**Taxes et contributions**\nContribution CL;${taxCL}\nContribution FTE;${taxFTE}\nContribution RTT;${taxRTT}\nTVA;${taxTVA}\nTotal des taxes et contributions;${taxTotal}\n\n**Montant total de la facture**;${grandTotalValue}
     `;
     
     const BOM = '\uFEFF';

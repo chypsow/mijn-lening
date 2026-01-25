@@ -255,10 +255,10 @@
 }
 .fa.fa-info {
     font-size: .85rem;
-    background: var(--accent-plus);
+    background: var(--bg-modal);
     border-radius: 50%;
-    color: var(--top-header-color);
-    padding: .4rem .6rem;
+    color: var(--label-color);
+    padding: .3rem .6rem;
 }
 /* kVA Info Modal */
 .kva-info-modal {
