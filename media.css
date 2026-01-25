@@ -39,6 +39,7 @@
     .interval-input-container label{ font-size: .9rem;}
     .table-header th, .table-inhoud td{ font-size:.65rem; }
     .lang-select button { font-size: .9rem; }
+    .theme-menu-btn { font-size: .9rem; width: 2rem; height: 2rem; }
     .simulator, .calculator, .generator, .invoice-content{ width:100%; border-radius: 0; box-shadow: none; background: transparent;}
     .datums { flex-direction:column; align-items: flex-start; gap:.5rem; }
     .datums p span:first-child { font-size:.65rem; }
@@ -75,9 +76,13 @@
     .kva-modal-content { width: 95%; padding: 1.5rem; max-height: 90vh; }
     .kva-modal-header { font-size: 1.5rem; }
     .kva-section h3 { font-size: 1.1rem; }
-    .kva-table { font-size: 0.9rem; }
+    .kva-table { font-size: 0.7rem; }
     .kva-table th,
     .kva-table td { padding: 0.6rem 0.4rem; }
+    .kva-section h3 { font-size: 1rem;}
+    .kva-description { font-size: .75rem; }
+    .kva-formula p { font-size: .75rem; }
+    .kva-modal-header { font-size: 1.2rem; }
 }
 
 /* Print styles */
