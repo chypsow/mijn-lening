@@ -11,10 +11,10 @@ export function createTab04() {
     const resultsSection = el('div', { class: 'results-section' });
     content.appendChild(resultsSection);
 
-    const billingPeriodContainer = el('div', { class: 'billing-period-container' });
+    const billingPeriodContainer = el('div', { class: 'billing-period-container no-print' });
     resultsSection.appendChild(billingPeriodContainer);
 
-    const billingPeriodSelect = el('select', { class: 'billing-period-select no-print', id: 'billingPeriodSelect' }, [
+    const billingPeriodSelect = el('select', { class: 'billing-period-select', id: 'billingPeriodSelect' }, [
         el('option', { value: 'months', text: t('invoice.duration-months'), 'data-i18n': 'invoice.duration-months' }),
         el('option', { value: 'dates', text: t('invoice.period'), 'data-i18n': 'invoice.period' })
     ]);

@@ -105,18 +105,20 @@
 
 /* Print styles */
 @media print{
-    :root { --text-color: #000; --label-color: #000; --output-fields-color: #7381af; --accent: #7381af; --input-color: #000; }
-    :root.theme-light-orange { --accent-plus: #7e92c0; }
+    :root{ --text-color: #000; --label-color: #000; --output-fields-color: #7381af; --accent: #7381af; --input-color: #000; }
+    :root.theme-light-orange{ --accent-plus: #7e92c0; }
     body{ background:transparent; color:#000; }
-    header h1 { color:black; text-shadow: none; font-size: 1.1rem; letter-spacing: 1px;}
-    .header-row-output { margin-bottom: .5rem;}
+    header h1{ color:black; text-shadow: none; font-size: 1.1rem; letter-spacing: 1px; }
+    header{ margin-top:0; margin-bottom:0; }
     footer{ display:none; }
     table{ table-layout:auto ; width:100%; }
+    input[type="date"]::-webkit-calendar-picker-indicator {display: none; }
     .no-print{ display:none; }
     .on-print{ display:block; }
-    .lang-select { display: none; }
+    .header-row-output{ margin-bottom: .5rem;}
+    .lang-select{ display: none; }
     .simulator, .calculator, .generator{ width:100%; margin:0; padding:0; box-shadow:none; background:transparent; }
-    .top-row { flex-direction:row; }
+    .top-row{ flex-direction:row; }
     .overzicht, .output-sectie, .output-fields { padding: 0; background: transparent; box-shadow: none; }
     .table-header th{ font-size:0.7rem ; color:#000; border-color:#000; }
     .lening-overzicht{ padding:0; list-style-type: none; column-count: 2; }
@@ -124,11 +126,15 @@
     .lening-overzicht li{ color: #929292; padding: .2rem 0; }
     .lening-overzicht li span{ font-weight: bold; margin-left: .5rem; }
     .annual-report-table{ border-collapse: collapse; }
-    .annual-report-table thead { position: static; border-bottom: 1px solid #7a7a7a; background: transparent; }
-    .annual-report-table tbody tr { border-bottom: 1px solid #d3d3d3; background: transparent; }
-    .annual-report-table tbody tr:hover { background: unset; }
-    .annual-report-table tbody td { color: #4e4e4e; }
-    .invoice-section{ border-left: 4px solid var(--accent-plus); padding-left: .5rem; margin-bottom: 1rem; }
-    .invoice-content{ box-shadow: none; }
-    input[type="date"]::-webkit-calendar-picker-indicator {display: none; }
+    .annual-report-table thead{ position: static; border-bottom: 1px solid #7a7a7a; background: transparent; }
+    .annual-report-table tbody tr{ border-bottom: 1px solid #d3d3d3; background: transparent; }
+    .annual-report-table tbody tr:hover{ background: unset; }
+    .annual-report-table tbody td{ color: #4e4e4e; }
+    .invoice-section{ border-left: 4px solid var(--accent-plus); margin-bottom: 1rem; background:transparent; border-radius: none; }
+    .invoice-content{ box-shadow: none; background: transparent; margin-top:0; }
+    .billing-period-result{ background: transparent; }
+    .results-section{ flex-direction:column; gap:1rem; }
+    .result-row { background: #f5f5f5; border-bottom: 1px solid #d3d3d3; }
 }
+
+
